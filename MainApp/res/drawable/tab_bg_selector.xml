@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Active tab -->
+    <item android:drawable="@drawable/abs__tab_selected_holo" android:state_selected="true"/>
+    <!-- Inactive tab -->
+    <item android:drawable="@drawable/transparent" android:state_selected="false"/>
+
+</selector>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/recipient"
+            android:layout_weight="1"
+            android:entries="@array/admin"/>
+
+    </LinearLayout>
+    <EditText
+        android:id="@+id/userid"
+        android:layout_width="0.0001dp"
+        android:layout_height="0.0001dp"
+        android:text="robbymuksin@xmpp.jp"/>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="0.0001dp"
+        android:layout_height="0.0001dp"
+        android:text="gilak001"
+        android:inputType="textPassword"/>
+
+
+    <EditText
+        android:id="@+id/host"
+        android:layout_width="0.0001dp"
+        android:layout_height="0.0001dp"/>
+    <EditText
+        android:id="@+id/port"
+        android:layout_width="0.0001dp"
+        android:layout_height="0.0001dp"/>
+    <EditText
+        android:id="@+id/service"
+        android:layout_width="0.0001dp"
+        android:layout_height="0.0001dp"/>
+
+    <Button
+        android:id="@+id/Ceksal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Cek Saldo"/>
+
+    <ListView
+        android:id="@+id/listMessages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:scrollbars="horizontal"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <EditText android:id="@+id/sendText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/send"
+        android:layout_alignParentLeft="true"
+        android:hint="Tanyakan Customer kami"
+        android:textSize="16sp"
+        android:autoText="true"
+        android:singleLine="true"
+        android:scrollHorizontally="true" />
+
+    <Button android:id="@+id/send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text=" Kirim ">
+    </Button>
+    </RelativeLayout>>
+</LinearLayout>
+

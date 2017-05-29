@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/id_customer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="id disini"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:id="@+id/hasilttd"
+        android:layout_below="@+id/id_customer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="hasil disini"
+        android:textColor="#000000"/>
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/fl1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/hasilttd"
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="#FFFFFF"
+        android:orientation="horizontal">
+
+        <com.mahkota_company.android.prospect.CanvasView
+            android:id="@+id/draw"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_marginLeft="70dp"
+            android:onClick="clearCanvas"
+            android:text="Ulangi" />
+
+        <Button
+            android:id="@+id/Save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="70dp"
+            android:onClick="onClick"
+            android:text="Simpan" />
+
+    </FrameLayout>
+</RelativeLayout>

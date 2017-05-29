@@ -1,0 +1,90 @@
+<resources>
+
+    <drawable name="transparent_background">#00000000</drawable>
+
+    <color name="listview_divider">#898B8C</color>
+    <color name="divider_color">#11000000</color>
+    <color name="myPrimaryColor">#E6212A</color>
+    <color name="myPrimaryDarkColor">#3F51B5</color>
+    <color name="myAccentColor">#3F51B5</color>
+    <color name="myDrawerBackground">#F2F2F2</color>
+    <color name="myWindowBackground">#DEDEDE</color>
+    <color name="myTextPrimaryColor">#FFFFFF</color>
+    <color name="myNavigationColor">#000000</color>
+    <color name="selected_gray">#ffdbdbdb</color>
+    <color name="splash_screen">#E6212A</color>
+    <color name="white">#FFFFFF</color>
+    <color name="dark_blue">#003366</color>
+    <color name="dark_blue_modified">#4169e1</color>
+    <color name="dark_grey">#555555</color>
+    <color name="dark_grey_smoke">#737B88</color>
+    <color name="card_pressed">#7E0099CC</color>
+    <color name="deep_blue">#0000ff</color>
+    <color name="splash_light_blue">#87CEFA</color>
+    <color name="corn_flower_blue">#6495ed</color>
+    <color name="medium_slate_blue">#7b68ee</color>
+    <color name="white_smoke">#f5f5f5</color>
+    <color name="transparent_white">#70ffffff</color>
+    <color name="login_background">#CCD3EF</color>
+    <color name="black">#000000</color>
+    <color name="deep_sky_blue">#00bfff</color>
+    <color name="levender">#e6e6fa</color>
+    <color name="Ivory3">#cdcdc1</color>
+    <color name="cell_title_color">#7f0000</color>
+    <color name="snow2">#eee9e9</color>
+    <color name="navy_blue">#000080</color>
+    <color name="dark_orange">#ff8c00</color>
+    <color name="transparent">#00000000</color>
+    <color name="antique_white">#8b8378</color>
+    <color name="medium_blue">#0000cd</color>
+    <color name="grey">#dcdcdc</color>
+    <color name="steel_blue">#4682b4</color>
+    <color name="light_steel_blue">#ccccd0</color>
+    <color name="list_cell">#c4dae5</color>
+    <color name="medium_sea_green">#3cb371</color>
+    <color name="dark_green">#006400</color>
+    <color name="dasgboard_grid">#00a651</color>
+    <color name="tab_unselected">#2b6845</color>
+    <color name="drawer_color">#2b6846</color>
+    <color name="drawer_button">#267148</color>
+    <color name="drawer_pending">#40c835</color>
+    <color name="drawer_approve">#89ab71</color>
+    <color name="drawer_request">#a2e0bc</color>
+    <color name="drawer_item_selected">#508e4d</color>
+    <color name="rosy_brown">#bc8f8f</color>
+    <color name="indian_red">#cd5c5c</color>
+    <color name="marker_rounded">#990000</color>
+    <color name="main_blue_theme">#00aeec</color>
+    <color name="main_green_theme">#8DC63F</color>
+    <color name="ColorPrimaryDark">#3367d6</color>
+    <color name="ColorPrimary">#4285f4</color>
+
+
+    <!-- A light Holo shade of blue -->
+    <color name="holo_blue_light">#ff33b5e5</color>
+    <!-- A light Holo shade of green -->
+    <color name="holo_green_light">#ff99cc00</color>
+    <!-- A light Holo shade of red -->
+    <color name="holo_red_light">#ffff4444</color>
+    <!-- A dark Holo shade of blue -->
+    <color name="holo_blue_dark">#ff0099cc</color>
+    <!-- A dark Holo shade of green -->
+    <color name="holo_green_dark">#ff669900</color>
+    <!-- A dark Holo shade of red -->
+    <color name="holo_red_dark">#ffcc0000</color>
+    <!-- A Holo shade of purple -->
+    <color name="holo_purple">#ffaa66cc</color>
+    <!-- A light Holo shade of orange -->
+    <color name="holo_orange_light">#ffffbb33</color>
+    <!-- A dark Holo shade of orange -->
+    <color name="holo_orange_dark">#ffff8800</color>
+    <!-- A really bright Holo shade of blue -->
+    <color name="holo_blue_bright">#ff00ddff</color>
+
+    <!-- Play Store Colors -->
+    <color name="android_green">#b3c833</color>
+    <color name="android_red">#ce5043</color>
+    <color name="android_blue">#1aa1e1</color>
+    <color name="android_slate_blue">#658092</color>
+
+</resources>

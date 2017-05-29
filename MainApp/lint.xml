@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="ClickableViewAccessibility" severity="ignore">
+        <ignore path="src/com/eduhealth/android/NavigationDrawerAdapter.java" />
+    </issue>
+    <issue id="CutPasteId">
+        <ignore path="src/com/menarafood_company/android/AddPhotoPurchaseActivity.java" />
+    </issue>
+    <issue id="InflateParams" severity="ignore" />
+    <issue id="SimpleDateFormat" severity="ignore" />
+    <issue id="UseSparseArrays" severity="ignore">
+        <ignore path="src/com/menarafood_company/android/LocatorActivity.java" />
+    </issue>
+</lint>

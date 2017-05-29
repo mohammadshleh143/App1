@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dip" >
+
+    <TextView
+        android:id="@+id/detail_target_penjualan_kode_product"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:layout_weight="0.5"
+        android:maxLines="5"
+        android:minLines="1"
+        android:padding="10dip"
+        android:text="@string/app_inventory_unload_product_target_penjualan_textview_kode_product"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/detail_target_penjualan_nama_product"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:layout_weight="1"
+        android:maxLines="5"
+        android:minLines="1"
+        android:padding="10dip"
+        android:text="@string/app_inventory_unload_product_target_penjualan_textview_nama_product"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/detail_target_penjualan_jumlah"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:layout_weight="0.5"
+        android:maxLines="5"
+        android:minLines="1"
+        android:padding="10dip"
+        android:text="@string/app_inventory_unload_product_target_penjualan_textview_jumlah"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/detail_target_penjualan_jumlah_terjual"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:layout_weight="0.5"
+        android:maxLines="5"
+        android:minLines="1"
+        android:padding="10dip"
+        android:text="@string/app_inventory_unload_product_target_penjualan_textview_jumlah_terjual"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+</LinearLayout>

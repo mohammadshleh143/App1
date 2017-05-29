@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_focused="true" android:state_pressed="true"><shape>
+            <solid android:color="@color/white" />
+
+            <stroke android:width="2.3dp" android:color="@color/medium_sea_green" />
+
+            <corners android:radius="0dp" />
+        </shape></item>
+    <item android:state_focused="false" android:state_pressed="true"><shape>
+            <solid android:color="@color/white" />
+
+            <stroke android:width="2.3dp" android:color="@color/white" />
+
+            <corners android:radius="0dp" />
+        </shape></item>
+    <item android:state_focused="true" android:state_pressed="false"><shape>
+            <solid android:color="#e2f8ff" />
+
+            <stroke android:width="0.7dp" android:color="@color/medium_sea_green" />
+
+            <corners android:radius="0dp" />
+        </shape></item>
+    <item android:state_focused="false" android:state_pressed="false"><shape>
+            <solid android:color="@color/white" />
+
+            <gradient android:angle="270" android:endColor="#e2f8ff" android:startColor="#e2f8ff" />
+
+            <stroke android:width="0.7dp" android:color="@color/medium_sea_green" />
+
+            <corners android:radius="0dp" />
+        </shape></item>
+    <item android:state_enabled="true"><shape>
+            <solid android:color="@color/white" />
+
+            <padding android:bottom="4dp" android:left="4dp" android:right="4dp" android:top="4dp" />
+        </shape></item>
+
+</selector>

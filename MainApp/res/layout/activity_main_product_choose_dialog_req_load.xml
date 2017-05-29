@@ -1,0 +1,229 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/eula_relative_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="10dip" >
+
+    <LinearLayout
+        android:id="@+id/activity_customer_linear_search"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/activity_product_edittext_search"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/description_back_shape"
+            android:hint="@string/app_sales_order_search_product"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:layout_margin="5dip"
+            android:textColor="@color/black"
+            android:textColorHint="@color/Ivory3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_customer_linear_count1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_customer_linear_search"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tl1"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Pieces"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/activity_product_edittext_pieces"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:background="@drawable/description_back_shape"
+            android:hint="@string/app_sales_order_Pcs"
+            android:text="0"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="4"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/Ivory3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_customer_linear_count2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_customer_linear_count1"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tl2"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Renceng"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/activity_product_edittext_renceng"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:background="@drawable/description_back_shape"
+            android:hint="@string/app_sales_order_Pcs"
+            android:text="0"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="4"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/Ivory3" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/activity_customer_linear_count3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_customer_linear_count2"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tl3"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Pack"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/activity_product_edittext_pack"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:background="@drawable/description_back_shape"
+            android:hint="@string/app_sales_order_Pack"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="4"
+            android:text="0"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/Ivory3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_customer_linear_count4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_customer_linear_count3"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tl4"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Dus"
+
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/activity_product_edittext_dus"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:background="@drawable/description_back_shape"
+            android:hint="@string/app_sales_order_dus"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:text="0"
+            android:maxLength="4"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/Ivory3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_customer_linear_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_customer_linear_count4"
+        android:orientation="horizontal"
+        android:padding="7dip" >
+
+        <TextView
+            android:id="@+id/activity_sales_order_title_kode_product"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.2"
+            android:text="@string/app_sales_order_title_gambar_product"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/activity_sales_order_title_nama_product"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="@string/app_sales_order_title_nama_product"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/activity_sales_order_title_harga_product"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/app_sales_order_title_harga_product"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/activity_sales_order_title_action"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/app_sales_order_title_action"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/dividerHeaderBottom"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/activity_customer_linear_title"
+        android:background="#414141" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/dividerHeaderBottom"
+        android:background="@color/white"
+        android:divider="@color/listview_divider"
+        android:dividerHeight="0.8dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
+
+</RelativeLayout>

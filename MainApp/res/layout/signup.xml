@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical" >
+
+    <EditText
+        android:id="@+id/editTextUserName"
+        android:hint="User Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+         android:hint="Password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/editTextConfirmPassword"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Confirm Password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/edhost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="xmpp.jp"
+        android:editable="false"/>
+
+    <EditText
+        android:id="@+id/edport"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="5222"
+        android:editable="false"/>
+
+    <EditText
+        android:id="@+id/edservice"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="xmpp.jp"
+        android:editable="false"/>
+
+    <Button
+        android:id="@+id/buttonCreateAccount"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Account"
+        android:layout_marginTop="30dp" />
+    
+</LinearLayout>

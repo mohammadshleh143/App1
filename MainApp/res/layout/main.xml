@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/recipient"
+            android:layout_weight="1"
+            android:entries="@array/admin"/>
+
+    </LinearLayout>
+    <EditText
+        android:id="@+id/userid"
+        android:layout_width="0.0001dp"
+        android:layout_height="0.0001dp"
+        android:text="robbymuksin@xmpp.jp"/>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="0.0001dp"
+        android:layout_height="0.0001dp"
+        android:text="gilak001"
+        android:inputType="textPassword"/>
+
+
+    <EditText
+        android:id="@+id/host"
+        android:layout_width="0.0001dp"
+        android:layout_height="0.0001dp"/>
+    <EditText
+        android:id="@+id/port"
+        android:layout_width="0.0001dp"
+        android:layout_height="0.0001dp"/>
+    <EditText
+        android:id="@+id/service"
+        android:layout_width="0.0001dp"
+        android:layout_height="0.0001dp"/>
+
+    <ListView
+        android:id="@+id/listMessages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:scrollbars="horizontal"/>
+
+    <EditText android:id="@+id/sendText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="tulis sesuatu ..."
+        android:textSize="16sp"
+        android:autoText="true"
+        android:singleLine="true"
+        android:scrollHorizontally="true"
+        />
+    <Button android:id="@+id/send"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Send">
+    </Button>
+</LinearLayout>
+
