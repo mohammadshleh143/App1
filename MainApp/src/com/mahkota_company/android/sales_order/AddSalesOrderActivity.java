@@ -140,6 +140,8 @@ public class AddSalesOrderActivity extends FragmentActivity {
 		tvHeaderDeskripsiSalesOrder.setTypeface(typefaceSmall);
 		tvHeaderTotalbayarTitle.setTypeface(typefaceSmall);
 		tvTotalbayarValue.setTypeface(typefaceSmall);
+		mButtonTTD.setVisibility(View.INVISIBLE);
+
 		customerList = new ArrayList<Customer>();
 		customerStringList = new ArrayList<String>();
 		SharedPreferences spPreferences = getSharedPrefereces();
@@ -372,8 +374,7 @@ public class AddSalesOrderActivity extends FragmentActivity {
 			int sec = now.get(Calendar.SECOND);
 			final String time = zero(hrs) + zero(min) + zero(sec);
 
-			ArrayList<SalesOrder> tempSales_order_list = databaseHandler
-					.getAllSalesOrder();
+			ArrayList<SalesOrder> tempSales_order_list = databaseHandler.getAllSalesOrder();
 			int tempIndex = 0;
 			for (SalesOrder salesOrder : tempSales_order_list) {
 				tempIndex = salesOrder.getId_sales_order();
@@ -387,32 +388,14 @@ public class AddSalesOrderActivity extends FragmentActivity {
 				salesOrder.setDate_order(checkDate);
 				salesOrder.setDeskripsi(etDeskripsiSalesOrder.getText()
 						.toString());
-				salesOrder.setHarga_jual(detailSalesOrder
-						.getHarga_jual());
+				salesOrder.setHarga_jual(detailSalesOrder.getHarga_jual());
 				salesOrder.setId_promosi(idPromosi);
-				if(detailSalesOrder.getJumlah_order().equals(null)){
-					salesOrder.setJumlah_order("0");
-				}else{
-					salesOrder.setJumlah_order(detailSalesOrder.getJumlah_order());
-				}
 
-				if(detailSalesOrder.getJumlah_order1().equals(null)){
-					salesOrder.setJumlah_order1("0");
-				}else{
-					salesOrder.setJumlah_order1(detailSalesOrder.getJumlah_order1());
-				}
+				salesOrder.setJumlah_order(detailSalesOrder.getJumlah_order());
+				salesOrder.setJumlah_order1(detailSalesOrder.getJumlah_order1());
+				salesOrder.setJumlah_order2(detailSalesOrder.getJumlah_order2());
+				salesOrder.setJumlah_order3(detailSalesOrder.getJumlah_order3());
 
-				if(detailSalesOrder.getJumlah_order2().equals(null)){
-					salesOrder.setJumlah_order2("0");
-				}else{
-					salesOrder.setJumlah_order2(detailSalesOrder.getJumlah_order2());
-				}
-
-				if(detailSalesOrder.getJumlah_order3().equals(null)){
-					salesOrder.setJumlah_order3("0");
-				}else{
-					salesOrder.setJumlah_order3(detailSalesOrder.getJumlah_order3());
-				}
 				salesOrder.setKode_customer(kodeCustomer);
 				salesOrder.setNama_lengkap(etNamaCustomer.getText()
 						.toString());

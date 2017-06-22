@@ -166,17 +166,16 @@ public class DetailPenjualanActivity extends FragmentActivity {
 		penjualanDetailList = databaseHandler
 				.getAllPenjualanDetailWhereNomerPenjualan(main_app_nomer_order);
 		if (penjualanList.size() > 0 && penjualanDetailList.size() > 0) {
-			etDiskonValue.setText(String.valueOf(penjualanList.get(0)
-					.getDiskon()));
+			//etDiskonValue.setText(String.valueOf(penjualanList.get(0).getDiskon()));
 			int count = detailPenjualanList.size() + 1;
 			try {
-				Product product = databaseHandler
-						.getProduct(penjualanDetailList.get(0).getIdProduct());
+				//Product product = databaseHandler
+				//		.getProduct(penjualanDetailList.get(0).getIdProduct());
 				for (PenjualanDetail penjualanDetail : penjualanDetailList) {
-					updateListViewDetailOrder(new DetailPenjualan(count,
-							product.getId_product(), product.getNama_product(),
-							product.getKode_product(), product.getHarga_jual(),
-							penjualanDetail.getJumlah()));
+				//	updateListViewDetailOrder(new DetailPenjualan(count,
+				//			product.getId_product(), product.getNama_product(),
+				//			product.getKode_product(), product.getHarga_jual(),
+				//			penjualanDetail.getJumlah()));
 					count += 1;
 				}
 				updateTotalBayar();
@@ -263,14 +262,14 @@ public class DetailPenjualanActivity extends FragmentActivity {
 
 					Penjualan penjualan = new Penjualan();
 					penjualan.setId_penjualan(tempIndexPenjualan);
-					penjualan.setNomer_product_terjual(main_app_nomer_tp);
-					penjualan.setDate_product_terjual(checkDate);
-					penjualan.setTime_product_terjual(time);
-					penjualan.setId_customer(Integer
-							.parseInt(main_app_id_customer));
+					//penjualan.setNomer_product_terjual(main_app_nomer_tp);
+					//penjualan.setDate_product_terjual(checkDate);
+					//penjualan.setTime_product_terjual(time);
+					//penjualan.setId_customer(Integer
+					//		.parseInt(main_app_id_customer));
 					penjualan.setId_staff(Integer.parseInt(id_staff));
-					penjualan.setDiskon(Integer.parseInt(etDiskonValue
-							.getText().toString()));
+					//penjualan.setDiskon(Integer.parseInt(etDiskonValue
+					//		.getText().toString()));
 
 					databaseHandler.addPenjualan(penjualan);
 					ArrayList<PenjualanDetail> tempPenjualanDetail_list = databaseHandler
@@ -313,13 +312,13 @@ public class DetailPenjualanActivity extends FragmentActivity {
 						PenjualanDetail penjualanDetail = new PenjualanDetail();
 						penjualanDetail.setId_penjualan_detail(tempIndex
 								+ index);
-						penjualanDetail.setIdProduct(detailPenjualan
-								.getId_product());
-						penjualanDetail.setJumlah(detailPenjualan
-								.getJumlah_order());
-						penjualanDetail
-								.setNomer_product_terjual(tvNoPenjualanValue
-										.getText().toString());
+						//penjualanDetail.setIdProduct(detailPenjualan
+						//		.getId_product());
+						//penjualanDetail.setJumlah(detailPenjualan
+						//		.getJumlah_order());
+						//penjualanDetail
+						//		.setNomer_product_terjual(tvNoPenjualanValue
+						//				.getText().toString());
 						databaseHandler.addPenjualanDetail(penjualanDetail);
 						index += 1;
 					}

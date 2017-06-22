@@ -12,7 +12,7 @@
         android:layout_weight="1"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="14sp"/>
 
     <TextView
         android:id="@+id/customer_title_nama_customer"
@@ -21,7 +21,7 @@
         android:layout_weight="1.5"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="14sp"/>
 
     <TextView
         android:id="@+id/customer_title_alamat_customer"
@@ -30,6 +30,6 @@
         android:layout_weight="0.5"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="14sp"/>
 
 </LinearLayout>

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.Toast;
@@ -31,18 +32,28 @@ public class GpsChecking extends Activity {
                    })
                    .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
                        public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
-                            GpsChecking.this.finish();
+                            finish();
                        }
                    });
             final AlertDialog alert = builder.create();
             alert.show();
         }
-        else
-        {
+        else{
         	Toast.makeText(getApplicationContext(), "GPS Enabled", Toast.LENGTH_LONG).show();
             startActivity(new Intent(getApplicationContext(),
                     SplashScreenActivity.class));
             finish();
         }
     }
-}
+
+    private void turnGPSOn(){
+        String provider = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+
+        if(!provider.contains("gps")){ //if gps is disabled
+            final Intent poke = new Intent();
+            poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
+            poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
+            poke.setData(Uri.parse("3"));
+            sendBroadcast(poke);
+        }
+    }}

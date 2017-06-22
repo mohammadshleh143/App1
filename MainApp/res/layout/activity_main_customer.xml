@@ -62,7 +62,11 @@
                         android:singleLine="true"
                         android:textColor="@color/black"
                         android:textColorHint="@color/Ivory3" />
+
+
                 </LinearLayout>
+
+
 
                 <LinearLayout
                     android:id="@+id/activity_customer_linear_title"
@@ -103,6 +107,7 @@
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
+
                 </LinearLayout>
 
                 <View

@@ -101,4 +101,5 @@ public class Staff {
 	public void setId_depo(int id_depo) {
 		this.id_depo = id_depo;
 	}
+
 }

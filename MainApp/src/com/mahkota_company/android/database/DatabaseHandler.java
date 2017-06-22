@@ -58,6 +58,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String TABLE_TRACKING = "tracking";
 	private static final String TABLE_PRODUCT_TARGET = "product_target";
 	private static final String TABLE_PENJUALAN = "penjualan";
+	private static final String TABLE_PENJUALAN_SATU = "penjualan";
 	private static final String TABLE_PENJUALAN_DETAIL = "penjualan_detail";
 	private static final String LOG_TAG = AddCustomerProspectActivity.class.getSimpleName();
 	private static final String TABLE_TRACKING_LOGS = "tracking_logs";
@@ -190,17 +191,32 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_PRODUCT_TARGET_JUMLAH_TERJUAL = "jumlah_terjual";
 	// Penjualan Column Name
 	private static final String KEY_PENJUALAN_ID_PENJUALAN = "id_penjualan";
-	private static final String KEY_PENJUALAN_NOMER_PENJUALAN = "nomer_product_terjual";
-	private static final String KEY_PENJUALAN_DATE_PENJUALAN = "date_product_terjual";
-	private static final String KEY_PENJUALAN_TIME_PENJUALAN = "time_product_terjual";
-	private static final String KEY_PENJUALAN_ID_CUSTOMER = "id_customer";
+	private static final String KEY_PENJUALAN_TYPE_PENJUALAN= "type_penjualan";
+	private static final String KEY_PENJUALAN_NO_PENJUALAN= "no_penjualan";
+	private static final String KEY_PENJUALAN_NAMA_CUSTOMER= "nama_customer";
+	private static final String KEY_PENJUALAN_ALAMAT= "alamat";
+	private static final String KEY_PENJUALAN_KETERANGAN= "keterangan";
+	private static final String KEY_PENJUALAN_DATE= "date";
+	private static final String KEY_PENJUALAN_TIME= "time";
+	private static final String KEY_PENJUALAN_LATS= "lats";
+	private static final String KEY_PENJUALAN_LONGS= "longs";
+	private static final String KEY_PENJUALAN_FOTO1= "foto1";
+	private static final String KEY_PENJUALAN_FOTO2= "foto2";
+	private static final String KEY_PENJUALAN_TTD= "ttd";
+	private static final String KEY_PENJUALAN_STATUS_PENJUALAN= "status_penjualan";
 	private static final String KEY_PENJUALAN_ID_STAFF = "id_staff";
-	private static final String KEY_PENJUALAN_DISKON = "diskon";
 	// Penjualan Detail Column Name
 	private static final String KEY_PENJUALAN_DETAIL_ID_PENJUALAN_DETAIL = "id_penjualan_detail";
-	private static final String KEY_PENJUALAN_DETAIL_NOMER_PENJUALAN = "nomer_product_terjual";
+	private static final String KEY_PENJUALAN_DETAIL_NO_PENJUALAN = "no_penjualan";
 	private static final String KEY_PENJUALAN_DETAIL_ID_PRODUCT = "id_product";
+	private static final String KEY_PENJUALAN_DETAIL_HARGA= "harga";
+	private static final String KEY_PENJUALAN_DETAIL_HARGA_JUAL= "harga_jual";
+	private static final String KEY_PENJUALAN_DETAIL_NOMER_REQUEST_LOAD= "nomer_request_load";
+	private static final String KEY_PENJUALAN_DETAIL_ID_STAFF= "id_staff";
 	private static final String KEY_PENJUALAN_DETAIL_JUMLAH = "jumlah";
+	private static final String KEY_PENJUALAN_DETAIL_JUMLAH1 = "jumlah1";
+	private static final String KEY_PENJUALAN_DETAIL_JUMLAH2 = "jumlah2";
+	private static final String KEY_PENJUALAN_DETAIL_JUMLAH3 = "jumlah3";
 
 	// JADWAL Table Columns names
 	private static final String KEY_JADWAL_ID_JADWAL = "id_jadwal";
@@ -401,11 +417,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		String CREATE_TABLE_STAFF = "CREATE TABLE " + TABLE_STAFF + "("
 				+ KEY_STAFF_ID_STAFF + " INTEGER PRIMARY KEY,"
-				+ KEY_STAFF_NAMA_LENGKAP + " TEXT," + KEY_STAFF_USERNAME
-				+ " TEXT," + KEY_STAFF_PASSWORD + " TEXT," + KEY_STAFF_NO_TELP
-				+ " TEXT," + KEY_STAFF_LEVEL + " INTEGER,"
-				+ KEY_STAFF_ID_BRANCH + " TEXT," + KEY_STAFF_TYPE_CUSTOMER
-				+ " TEXT," + KEY_STAFF_ID_DEPO + " TEXT" + ")";
+				+ KEY_STAFF_NAMA_LENGKAP + " TEXT,"
+				+ KEY_STAFF_USERNAME+ " TEXT,"
+				+ KEY_STAFF_PASSWORD + " TEXT,"
+				+ KEY_STAFF_NO_TELP + " TEXT,"
+				+ KEY_STAFF_LEVEL + " INTEGER,"
+				+ KEY_STAFF_ID_BRANCH + " TEXT,"
+				+ KEY_STAFF_TYPE_CUSTOMER + " TEXT,"
+				+ KEY_STAFF_ID_DEPO + " TEXT" + ")";
 		db.execSQL(CREATE_TABLE_STAFF);
 
 		String CREATE_TABLE_STAFF_TEMP = "CREATE TABLE " + TABLE_STAFF_TEMP
@@ -711,20 +730,36 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.execSQL(CREATE_TABLE_PRODUCT_TARGET);
 		String CREATE_TABLE_PENJUALAN = "CREATE TABLE " + TABLE_PENJUALAN + "("
 				+ KEY_PENJUALAN_ID_PENJUALAN + " INTEGER PRIMARY KEY,"
-				+ KEY_PENJUALAN_NOMER_PENJUALAN + " TEXT,"
-				+ KEY_PENJUALAN_DATE_PENJUALAN + " TEXT,"
-				+ KEY_PENJUALAN_TIME_PENJUALAN + " TEXT,"
-				+ KEY_PENJUALAN_ID_CUSTOMER + " INTEGER,"
-				+ KEY_PENJUALAN_ID_STAFF + " INTEGER," + KEY_PENJUALAN_DISKON
-				+ " INTEGER" + ")";
+				+ KEY_PENJUALAN_ID_STAFF + " INTEGER,"
+				+ KEY_PENJUALAN_TYPE_PENJUALAN+ " INTEGER,"
+				+ KEY_PENJUALAN_NO_PENJUALAN+ " TEXT,"
+				+ KEY_PENJUALAN_NAMA_CUSTOMER+ " TEXT,"
+				+ KEY_PENJUALAN_ALAMAT+ " TEXT,"
+				+ KEY_PENJUALAN_KETERANGAN+ " TEXT,"
+				+ KEY_PENJUALAN_DATE+ " TEXT,"
+				+ KEY_PENJUALAN_TIME+ " TEXT,"
+				+ KEY_PENJUALAN_LATS+ " TEXT,"
+				+ KEY_PENJUALAN_LONGS+ " TEXT,"
+				+ KEY_PENJUALAN_FOTO1+ " TEXT,"
+				+ KEY_PENJUALAN_FOTO2+ " TEXT,"
+				+ KEY_PENJUALAN_TTD+ " TEXT,"
+				+ KEY_PENJUALAN_STATUS_PENJUALAN+ " TEXT"
+				 + ")";
 		db.execSQL(CREATE_TABLE_PENJUALAN);
 		String CREATE_TABLE_PENJUALAN_DETAIL = "CREATE TABLE "
 				+ TABLE_PENJUALAN_DETAIL + "("
-				+ KEY_PENJUALAN_DETAIL_ID_PENJUALAN_DETAIL
-				+ " INTEGER PRIMARY KEY,"
-				+ KEY_PENJUALAN_DETAIL_NOMER_PENJUALAN + " TEXT,"
-				+ KEY_PENJUALAN_DETAIL_ID_PRODUCT + " INTEGER,"
-				+ KEY_PENJUALAN_DETAIL_JUMLAH + " INTEGER" + ")";
+				+ KEY_PENJUALAN_DETAIL_ID_PENJUALAN_DETAIL + " INTEGER PRIMARY KEY,"
+				+ KEY_PENJUALAN_DETAIL_NO_PENJUALAN + " TEXT,"
+				+ KEY_PENJUALAN_DETAIL_ID_PRODUCT + " TEXT,"
+				+ KEY_PENJUALAN_DETAIL_HARGA + " TEXT,"
+				+ KEY_PENJUALAN_DETAIL_HARGA_JUAL + " TEXT,"
+				+ KEY_PENJUALAN_DETAIL_NOMER_REQUEST_LOAD + " TEXT,"
+				+ KEY_PENJUALAN_DETAIL_ID_STAFF + " TEXT,"
+				+ KEY_PENJUALAN_DETAIL_JUMLAH + " TEXT,"
+				+ KEY_PENJUALAN_DETAIL_JUMLAH1 + " TEXT,"
+				+ KEY_PENJUALAN_DETAIL_JUMLAH2 + " TEXT,"
+				+ KEY_PENJUALAN_DETAIL_JUMLAH3 + " TEXT"
+				+ ")";
 		db.execSQL(CREATE_TABLE_PENJUALAN_DETAIL);
 
 		String CREATE_TABLE_TRACKING_LOGS = "CREATE TABLE " + TABLE_TRACKING_LOGS + "("
@@ -1241,15 +1276,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(KEY_PENJUALAN_ID_PENJUALAN, penjualan.getId_penjualan());
-		values.put(KEY_PENJUALAN_NOMER_PENJUALAN,
-				penjualan.getNomer_product_terjual());
-		values.put(KEY_PENJUALAN_DATE_PENJUALAN,
-				penjualan.getDate_product_terjual());
-		values.put(KEY_PENJUALAN_TIME_PENJUALAN,
-				penjualan.getTime_product_terjual());
-		values.put(KEY_PENJUALAN_ID_CUSTOMER, penjualan.getId_customer());
 		values.put(KEY_PENJUALAN_ID_STAFF, penjualan.getId_staff());
-		values.put(KEY_PENJUALAN_DISKON, penjualan.getDiskon());
+		values.put(KEY_PENJUALAN_TYPE_PENJUALAN, penjualan.getType_penjualan());
+		values.put(KEY_PENJUALAN_NO_PENJUALAN, penjualan.getNo_penjualan());
+		values.put(KEY_PENJUALAN_NAMA_CUSTOMER, penjualan.getNama_customer());
+		values.put(KEY_PENJUALAN_ALAMAT, penjualan.getAlamat());
+		values.put(KEY_PENJUALAN_KETERANGAN, penjualan.getKeterangan());
+		values.put(KEY_PENJUALAN_DATE, penjualan.getDate());
+		values.put(KEY_PENJUALAN_TIME, penjualan.getTime());
+		values.put(KEY_PENJUALAN_LATS, penjualan.getLats());
+		values.put(KEY_PENJUALAN_LONGS, penjualan.getLongs());
+		values.put(KEY_PENJUALAN_FOTO1, penjualan.getFoto1());
+		values.put(KEY_PENJUALAN_FOTO2, penjualan.getFoto2());
+		values.put(KEY_PENJUALAN_TTD, penjualan.getTtd());
+		values.put(KEY_PENJUALAN_STATUS_PENJUALAN, penjualan.getStatus_penjualan());
 		// Inserting Row
 		db.insert(TABLE_PENJUALAN, null, values);
 		db.close(); // Closing database connection
@@ -1258,13 +1298,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public void addPenjualanDetail(PenjualanDetail penjualanDetail) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put(KEY_PENJUALAN_DETAIL_ID_PENJUALAN_DETAIL,
-				penjualanDetail.getId_penjualan_detail());
-		values.put(KEY_PENJUALAN_DETAIL_ID_PRODUCT,
-				penjualanDetail.getIdProduct());
-		values.put(KEY_PENJUALAN_DETAIL_JUMLAH, penjualanDetail.getJumlah());
-		values.put(KEY_PENJUALAN_DETAIL_NOMER_PENJUALAN,
-				penjualanDetail.getNomer_product_terjual());
+		values.put(KEY_PENJUALAN_DETAIL_ID_PENJUALAN_DETAIL,penjualanDetail.getId_penjualan_detail());
+		values.put(KEY_PENJUALAN_DETAIL_NO_PENJUALAN, penjualanDetail.getNo_penjualan());
+		values.put(KEY_PENJUALAN_DETAIL_ID_PRODUCT,penjualanDetail.getId_product());
+		values.put(KEY_PENJUALAN_DETAIL_HARGA,penjualanDetail.getHarga());
+		values.put(KEY_PENJUALAN_DETAIL_HARGA_JUAL,penjualanDetail.getHarga_jual());
+		values.put(KEY_PENJUALAN_DETAIL_NOMER_REQUEST_LOAD,penjualanDetail.getNomer_request_load());
+		values.put(KEY_PENJUALAN_DETAIL_ID_STAFF,penjualanDetail.getId_staff());
+		values.put(KEY_PENJUALAN_DETAIL_JUMLAH,penjualanDetail.getJumlah());
+		values.put(KEY_PENJUALAN_DETAIL_JUMLAH1,penjualanDetail.getJumlah1());
+		values.put(KEY_PENJUALAN_DETAIL_JUMLAH2,penjualanDetail.getJumlah2());
+		values.put(KEY_PENJUALAN_DETAIL_JUMLAH3,penjualanDetail.getJumlah3());
+
 		// Inserting Row
 		db.insert(TABLE_PENJUALAN_DETAIL, null, values);
 		db.close(); // Closing database connection
@@ -1324,7 +1369,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 						KEY_STAFF_ID_STAFF, KEY_STAFF_NAMA_LENGKAP, KEY_STAFF_USERNAME,
 						KEY_STAFF_PASSWORD, KEY_STAFF_NO_TELP, KEY_STAFF_LEVEL,
 						KEY_STAFF_ID_BRANCH, KEY_STAFF_TYPE_CUSTOMER,
-						KEY_STAFF_ID_DEPO }, KEY_STAFF_ID_STAFF + "=?",
+						KEY_STAFF_ID_DEPO}, KEY_STAFF_ID_STAFF + "=?",
 				new String[] { String.valueOf(id) }, null, null, null, null);
 
 		if (cursor != null)
@@ -2541,7 +2586,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 			// Select All Query
 			String selectQuery = "SELECT * FROM " + TABLE_CUSTOMER
-					+ " WHERE blokir ='Y'";
+					+ " WHERE blokir ='Y' and status_update='2'";
 			SQLiteDatabase db = this.getWritableDatabase();
 			Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -3028,6 +3073,79 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return customer_list;
 	}
 
+	//Getall NOO
+	public ArrayList<Customer> getAllCustomerNoo() {
+		try {
+			customer_list.clear();
+
+			// Select All Query
+			String selectQuery = "SELECT * FROM " + TABLE_CUSTOMER
+					+ " WHERE blokir ='Y' and status_update < 3 order by id_customer desc limit 50 ";
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					Customer customer = new Customer();
+					customer.setId_customer(cursor.getInt(0));
+					customer.setKode_customer(cursor.getString(1));
+					customer.setEmail(cursor.getString(2));
+					customer.setAlamat(cursor.getString(3));
+					customer.setLats(cursor.getString(4));
+					customer.setLongs(cursor.getString(5));
+					customer.setNama_lengkap(cursor.getString(6));
+					customer.setNo_telp(cursor.getString(7));
+					customer.setId_wilayah(cursor.getInt(8));
+					customer.setFoto_1(cursor.getString(9));
+					customer.setFoto_2(cursor.getString(10));
+					customer.setFoto_3(cursor.getString(11));
+					customer.setId_type_customer(cursor.getInt(12));
+					customer.setBlokir(cursor.getString(13));
+					customer.setDate(cursor.getString(14));
+					customer.setStatus_update(cursor.getString(15));
+					customer.setId_staff(cursor.getInt(16));
+					customer.setNo_ktp(cursor.getString(17));
+					customer.setTanggal_lahir(cursor.getString(18));
+					customer.setNama_bank(cursor.getString(19));
+					customer.setNo_rekening(cursor.getString(20));
+					customer.setAtas_nama(cursor.getString(21));
+					customer.setNpwp(cursor.getString(22));
+					customer.setNama_pasar(cursor.getString(23));
+					customer.setId_cluster(cursor.getInt(24));
+					customer.setTelp(cursor.getString(25));
+					customer.setFax(cursor.getString(26));
+					customer.setOmset(cursor.getString(27));
+					customer.setCara_pembayaran(cursor.getString(28));
+					customer.setPlafon_kredit(cursor.getString(29));
+					customer.setTerm_kredit(cursor.getString(30));
+					customer.setNama_istri(cursor.getString(31));
+					customer.setNama_anak1(cursor.getString(32));
+					customer.setNama_anak2(cursor.getString(33));
+					customer.setNama_anak3(cursor.getString(34));
+					customer.setKode_pos(cursor.getString(35));
+					customer.setId_depo(cursor.getInt(36));
+					customer.setIsactive(cursor.getString(37));
+					customer.setDescription(cursor.getString(38));
+					customer.setNama_toko(cursor.getString(39));
+					customer.setTtd1(cursor.getString(40));
+					customer.setTtd2(cursor.getString(41));
+					// Adding customer_list to list
+					customer_list.add(customer);
+				} while (cursor.moveToNext());
+			}
+
+			// return customer_list
+			cursor.close();
+			db.close();
+			return customer_list;
+		} catch (Exception e) {
+			Log.e("customer_list", "" + e);
+		}
+
+		return customer_list;
+	}
+
 	public ArrayList<Customer> getAllCustomerActivemaps(int id_wilayah) {
 		try {
 			customer_list.clear();
@@ -3373,6 +3491,79 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			// Select All Query
 			String selectQuery = "SELECT * FROM " + TABLE_CUSTOMER
 					+ " WHERE blokir ='N' AND status_update='2'";
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					Customer customer = new Customer();
+					customer.setId_customer(cursor.getInt(0));
+					customer.setKode_customer(cursor.getString(1));
+					customer.setEmail(cursor.getString(2));
+					customer.setAlamat(cursor.getString(3));
+					customer.setLats(cursor.getString(4));
+					customer.setLongs(cursor.getString(5));
+					customer.setNama_lengkap(cursor.getString(6));
+					customer.setNo_telp(cursor.getString(7));
+					customer.setId_wilayah(cursor.getInt(8));
+					customer.setFoto_1(cursor.getString(9));
+					customer.setFoto_2(cursor.getString(10));
+					customer.setFoto_3(cursor.getString(11));
+					customer.setId_type_customer(cursor.getInt(12));
+					customer.setBlokir(cursor.getString(13));
+					customer.setDate(cursor.getString(14));
+					customer.setStatus_update(cursor.getString(15));
+					customer.setId_staff(cursor.getInt(16));
+					customer.setNo_ktp(cursor.getString(17));
+					customer.setTanggal_lahir(cursor.getString(18));
+					customer.setNama_bank(cursor.getString(19));
+					customer.setNo_rekening(cursor.getString(20));
+					customer.setAtas_nama(cursor.getString(21));
+					customer.setNpwp(cursor.getString(22));
+					customer.setNama_pasar(cursor.getString(23));
+					customer.setId_cluster(cursor.getInt(24));
+					customer.setTelp(cursor.getString(25));
+					customer.setFax(cursor.getString(26));
+					customer.setOmset(cursor.getString(27));
+					customer.setCara_pembayaran(cursor.getString(28));
+					customer.setPlafon_kredit(cursor.getString(29));
+					customer.setTerm_kredit(cursor.getString(30));
+					customer.setNama_istri(cursor.getString(31));
+					customer.setNama_anak1(cursor.getString(32));
+					customer.setNama_anak2(cursor.getString(33));
+					customer.setNama_anak3(cursor.getString(34));
+					customer.setKode_pos(cursor.getString(35));
+					customer.setId_depo(cursor.getInt(36));
+					customer.setIsactive(cursor.getString(37));
+					customer.setDescription(cursor.getString(38));
+					customer.setNama_toko(cursor.getString(39));
+					customer.setTtd1(cursor.getString(40));
+					customer.setTtd2(cursor.getString(41));
+					// Adding customer_list to list
+					customer_list.add(customer);
+				} while (cursor.moveToNext());
+			}
+
+			// return customer_list
+			cursor.close();
+			db.close();
+			return customer_list;
+		} catch (Exception e) {
+			Log.e("customer_list", "" + e);
+		}
+
+		return customer_list;
+	}
+
+	// Getting All Customer
+	public ArrayList<Customer> getAllCustomerActiveAndUpdateProspect() {
+		try {
+			customer_list.clear();
+
+			// Select All Query
+			String selectQuery = "SELECT * FROM " + TABLE_CUSTOMER
+					+ " WHERE blokir ='Y' AND status_update='2'";
 			SQLiteDatabase db = this.getWritableDatabase();
 			Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -4065,12 +4256,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				do {
 					Penjualan penjualan = new Penjualan();
 					penjualan.setId_penjualan(cursor.getInt(0));
-					penjualan.setNomer_product_terjual(cursor.getString(1));
-					penjualan.setDate_product_terjual(cursor.getString(2));
-					penjualan.setTime_product_terjual(cursor.getString(3));
-					penjualan.setId_customer(cursor.getInt(4));
-					penjualan.setId_staff(cursor.getInt(5));
-					penjualan.setDiskon(cursor.getInt(6));
+					penjualan.setId_staff(cursor.getInt(1));
+					penjualan.setType_penjualan(cursor.getInt(2));
+					penjualan.setNo_penjualan(cursor.getString(3));
+					penjualan.setNama_customer(cursor.getString(4));
+					penjualan.setAlamat(cursor.getString(5));
+					penjualan.setKeterangan(cursor.getString(6));
+					penjualan.setDate(cursor.getString(7));
+					penjualan.setTime(cursor.getString(8));
+					penjualan.setLats(cursor.getString(9));
+					penjualan.setLongs(cursor.getString(10));
+					penjualan.setFoto1(cursor.getString(11));
+					penjualan.setFoto2(cursor.getString(12));
+					penjualan.setTtd(cursor.getString(13));
+					penjualan.setStatus_penjualan(cursor.getString(14));
 					// Adding penjualan_list to list
 					penjualan_list.add(penjualan);
 				} while (cursor.moveToNext());
@@ -4091,7 +4290,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			penjualan_list.clear();
 			// Select All Query
 			String selectQuery = "SELECT  * FROM " + TABLE_PENJUALAN
-					+ " WHERE " + KEY_PENJUALAN_NOMER_PENJUALAN + "='"
+					+ " WHERE " + KEY_PENJUALAN_NO_PENJUALAN + "='"
 					+ nomer_penjualan + "' ";
 			SQLiteDatabase db = this.getWritableDatabase();
 			Cursor cursor = db.rawQuery(selectQuery, null);
@@ -4100,12 +4299,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				do {
 					Penjualan penjualan = new Penjualan();
 					penjualan.setId_penjualan(cursor.getInt(0));
-					penjualan.setNomer_product_terjual(cursor.getString(1));
-					penjualan.setDate_product_terjual(cursor.getString(2));
-					penjualan.setTime_product_terjual(cursor.getString(3));
-					penjualan.setId_customer(cursor.getInt(4));
-					penjualan.setId_staff(cursor.getInt(5));
-					penjualan.setDiskon(cursor.getInt(6));
+					penjualan.setId_staff(cursor.getInt(1));
+					penjualan.setType_penjualan(cursor.getInt(2));
+					penjualan.setNo_penjualan(cursor.getString(3));
+					penjualan.setNama_customer(cursor.getString(4));
+					penjualan.setAlamat(cursor.getString(5));
+					penjualan.setKeterangan(cursor.getString(6));
+					penjualan.setDate(cursor.getString(7));
+					penjualan.setTime(cursor.getString(8));
+					penjualan.setLats(cursor.getString(9));
+					penjualan.setLongs(cursor.getString(10));
+					penjualan.setFoto1(cursor.getString(11));
+					penjualan.setFoto2(cursor.getString(12));
+					penjualan.setTtd(cursor.getString(13));
+					penjualan.setStatus_penjualan(cursor.getString(14));
 					// Adding penjualan_list to list
 					penjualan_list.add(penjualan);
 				} while (cursor.moveToNext());
@@ -4126,7 +4333,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			penjualan_detail_list.clear();
 			// Select All Query
 			String selectQuery = "SELECT  * FROM " + TABLE_PENJUALAN_DETAIL
-					+ " WHERE " + KEY_PENJUALAN_DETAIL_NOMER_PENJUALAN + "='"
+					+ " WHERE " + KEY_PENJUALAN_DETAIL_NO_PENJUALAN + "='"
 					+ nomer_penjualan + "' ";
 			SQLiteDatabase db = this.getWritableDatabase();
 			Cursor cursor = db.rawQuery(selectQuery, null);
@@ -4135,10 +4342,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				do {
 					PenjualanDetail penjualanDetail = new PenjualanDetail();
 					penjualanDetail.setId_penjualan_detail(cursor.getInt(0));
-					penjualanDetail.setNomer_product_terjual(cursor
-							.getString(1));
-					penjualanDetail.setIdProduct(cursor.getInt(2));
-					penjualanDetail.setJumlah(cursor.getInt(3));
+					penjualanDetail.setNo_penjualan(cursor.getString(1));
+					penjualanDetail.setId_product(cursor.getString(2));
+					penjualanDetail.setHarga(cursor.getString(3));
+					penjualanDetail.setHarga_jual(cursor.getString(4));
+					penjualanDetail.setNomer_request_load(cursor.getString(5));
+					penjualanDetail.setId_staff(cursor.getString(6));
+					penjualanDetail.setJumlah(cursor.getString(7));
+					penjualanDetail.setJumlah1(cursor.getString(8));
+					penjualanDetail.setJumlah2(cursor.getString(9));
+					penjualanDetail.setJumlah3(cursor.getString(10));
 					// Adding penjualan_detail_list to list
 					penjualan_detail_list.add(penjualanDetail);
 				} while (cursor.moveToNext());
@@ -4165,10 +4378,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				do {
 					PenjualanDetail penjualanDetail = new PenjualanDetail();
 					penjualanDetail.setId_penjualan_detail(cursor.getInt(0));
-					penjualanDetail.setNomer_product_terjual(cursor
-							.getString(1));
-					penjualanDetail.setIdProduct(cursor.getInt(2));
-					penjualanDetail.setJumlah(cursor.getInt(3));
+					penjualanDetail.setNo_penjualan(cursor.getString(1));
+					penjualanDetail.setId_product(cursor.getString(2));
+					penjualanDetail.setHarga(cursor.getString(3));
+					penjualanDetail.setHarga_jual(cursor.getString(4));
+					penjualanDetail.setNomer_request_load(cursor.getString(5));
+					penjualanDetail.setId_staff(cursor.getString(6));
+					penjualanDetail.setJumlah(cursor.getString(7));
+					penjualanDetail.setJumlah1(cursor.getString(8));
+					penjualanDetail.setJumlah2(cursor.getString(9));
+					penjualanDetail.setJumlah3(cursor.getString(10));
 					// Adding penjualan_detail_list to list
 					penjualan_detail_list.add(penjualanDetail);
 				} while (cursor.moveToNext());
@@ -5672,6 +5891,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return count;
 	}
 
+	public int getpwd(String userNameStaff){
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor mCount = db
+				.rawQuery("select password from " + TABLE_STAFF + " where username='" +userNameStaff+"'", null);
+		mCount.moveToFirst();
+		int count = mCount.getInt(0);
+		mCount.close();
+		return count;
+	}
+
 	public int getCountTrackingLogs() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor mCount = db
@@ -5730,6 +5959,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				//+ " WHERE status_update='2'", null);
 				+ " WHERE " + KEY_CUSTOMER_BLOKIR
 				+ "='N' AND status_update='2'", null);
+		mCount.moveToFirst();
+		int count = mCount.getInt(0);
+		mCount.close();
+		return count;
+	}
+	public int getCountCustomerWhereValidAndUpdateProspect() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor mCount = db.rawQuery("select count(*) from " + TABLE_CUSTOMER
+				+ " WHERE " + KEY_CUSTOMER_BLOKIR
+				+ "='Y' AND status_update='2'", null);
 		mCount.moveToFirst();
 		int count = mCount.getInt(0);
 		mCount.close();
@@ -5949,8 +6188,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public int getCountPenjualan(String nomerPenjualan) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor mCount = db.rawQuery("select count(*) from " + TABLE_PENJUALAN
-				+ " WHERE " + KEY_PENJUALAN_NOMER_PENJUALAN + "='"
+				+ " WHERE " + KEY_PENJUALAN_ID_PENJUALAN + "='"
 				+ nomerPenjualan + "'", null);
+		mCount.moveToFirst();
+		int count = mCount.getInt(0);
+		mCount.close();
+		return count;
+	}
+
+	public int getAllCountPenjualan() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor mCount = db.rawQuery("select count(*) from " + TABLE_PENJUALAN, null);
 		mCount.moveToFirst();
 		int count = mCount.getInt(0);
 		mCount.close();
@@ -5960,7 +6208,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor mCount = db.rawQuery("select count(*) from "
 				+ TABLE_PENJUALAN_DETAIL + " WHERE "
-				+ KEY_PENJUALAN_DETAIL_NOMER_PENJUALAN + "='" + nomerPenjualan
+				+ KEY_PENJUALAN_DETAIL_ID_PENJUALAN_DETAIL+ "='" + nomerPenjualan
 				+ "'", null);
 		mCount.moveToFirst();
 		int count = mCount.getInt(0);
@@ -6152,6 +6400,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.execSQL("DELETE FROM " + TABLE_SALES_ORDER);
 	}
 
+	public void deleteAllTablePenjualan() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		db.execSQL("DELETE FROM " + TABLE_PENJUALAN);
+	}
+
+	public void deleteAllTablePenjualanDetail() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		db.execSQL("DELETE FROM " + TABLE_PENJUALAN_DETAIL);
+	}
+
 	public void deleteTableSalesOrderWhereNomerOrder(String nomerOrder) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		db.execSQL("DELETE FROM " + TABLE_SALES_ORDER + " WHERE "
@@ -6306,14 +6564,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	// Deleting Table Target Penjualan
 	public void deleteTablePenjualan(String nomor_tp) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(TABLE_PENJUALAN, KEY_PENJUALAN_NOMER_PENJUALAN + " = ? ",
+		db.delete(TABLE_PENJUALAN, KEY_PENJUALAN_NO_PENJUALAN + " = ? ",
 				new String[] { String.valueOf(nomor_tp) });
 		db.close();
 	}
 	// Deleting Table Target Penjualan
 	public void deleteTablePenjualanDetail(String nomor_tp) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(TABLE_PENJUALAN_DETAIL, KEY_PENJUALAN_DETAIL_NOMER_PENJUALAN
+		db.delete(TABLE_PENJUALAN_DETAIL, KEY_PENJUALAN_DETAIL_NO_PENJUALAN
 				+ " = ?", new String[] { String.valueOf(nomor_tp) });
 		db.close();
 	}
@@ -6411,6 +6669,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public void updateStatus() {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.execSQL("update customer set status_update='3' where status_update='2' and blokir='N'");
+	}
+
+	public void updateStatusApproveProspect() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.execSQL("update customer set status_update='3' where status_update='2' and blokir='Y'");
 	}
 
 	public void updateStatusProduct() {

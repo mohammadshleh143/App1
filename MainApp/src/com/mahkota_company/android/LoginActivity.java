@@ -1,7 +1,10 @@
 package com.mahkota_company.android;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +22,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.mahkota_company.android.common.AlarmReceiver;
 import com.mahkota_company.android.common.TrackingService;
 import com.mahkota_company.android.customer.CustomerActivity;
 import com.mahkota_company.android.database.Branch;
 import com.mahkota_company.android.database.Cluster;
 import com.mahkota_company.android.database.DatabaseHandler;
 import com.mahkota_company.android.database.Kemasan;
+import com.mahkota_company.android.database.Product;
 import com.mahkota_company.android.database.Staff;
 import com.mahkota_company.android.database.TypeCustomer;
 import com.mahkota_company.android.database.Wilayah;
@@ -33,8 +36,6 @@ import com.mahkota_company.android.utils.CONFIG;
 import com.mahkota_company.android.utils.GlobalApp;
 
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -56,6 +57,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 @SuppressWarnings("deprecation")
 public class LoginActivity extends Activity {
@@ -75,8 +77,10 @@ public class LoginActivity extends Activity {
 	private TextView txtDownloadData;
 	private String response_data;
 	private long tm = 1;
-
 	private Branch branch;
+	private ArrayList<Staff> staff_list = new ArrayList<Staff>();
+
+	LoginDataBaseAdapter loginDataBaseAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +106,11 @@ public class LoginActivity extends Activity {
 
 		btnLogin = (Button) findViewById(R.id.btn_login);
 		btnLogin.setTypeface(typefaceSmall);
-		btnLogin.setOnClickListener(loginClickListener);
+		if (databaseHandler.getCountStaff()==0){
+			btnLogin.setOnClickListener(loginClickListener);
+		}else{
+			btnLogin.setOnClickListener(loginClickListener1);
+		}
 
 		txtDownloadData.setOnClickListener(downloadDataClickListener);
 		// if (databaseHandler.getCountBranch() == 0
@@ -375,7 +383,6 @@ public class LoginActivity extends Activity {
 				});
 			}
 		}
-
 	}
 
 	private class DownloadDataBranch extends AsyncTask<String, Integer, String> {
@@ -1402,9 +1409,14 @@ public class LoginActivity extends Activity {
 
 	protected void gotoMenuUtama() {
 		startMonitoring();
+		SharedPreferences spPreferences = getSharedPrefereces();
+		String main_app_staff_level = spPreferences.getString(CONFIG.SHARED_PREFERENCES_STAFF_LEVEL, null);
+		int levelStaff = Integer.parseInt(main_app_staff_level);
 		Intent intentActivity = new Intent(this, CustomerActivity.class);
 		startActivity(intentActivity);
 		finish();
+
+
 	}
 
 	/**
@@ -1442,6 +1454,60 @@ public class LoginActivity extends Activity {
 			}
 		}
 	};
+
+	/**
+	 * Button Login Listener
+	 */
+	public OnClickListener loginClickListener1 = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			if(passValidationForLogin()){
+				String userNameStaff = edtLoginUsername.getText().toString();
+				String passwordStaff = edtLoginPassword.getText().toString();
+				String pwd=md5(passwordStaff);
+
+				SharedPreferences spPreferences = getSharedPrefereces();
+				String main_app_staff_pass = spPreferences.getString(CONFIG.SHARED_PREFERENCES_STAFF_PASSWORD, null);
+				String main_app_staff_username = spPreferences.getString(CONFIG.SHARED_PREFERENCES_STAFF_USERNAME, null);
+
+
+				if (userNameStaff.equals(main_app_staff_username)&& pwd.equals(main_app_staff_pass)){
+					//Toast.makeText(LoginActivity.this, "Congrats: Login Successfull", Toast.LENGTH_LONG).show();
+					Intent myIntent = new Intent(v.getContext(), CustomerActivity.class);
+					startActivity(myIntent);
+					LoginActivity.this.finish();
+				}else{
+					Toast.makeText(LoginActivity.this, "User Name or Password does not match", Toast.LENGTH_LONG).show();
+				}
+			}
+		}
+	};
+
+	public static final String md5(final String s) {
+		final String MD5 = "MD5";
+		try {
+			// Create MD5 Hash
+			MessageDigest digest = java.security.MessageDigest
+					.getInstance(MD5);
+			digest.update(s.getBytes());
+			byte messageDigest[] = digest.digest();
+
+			// Create Hex String
+			StringBuilder hexString = new StringBuilder();
+			for (byte aMessageDigest : messageDigest) {
+				String h = Integer.toHexString(0xFF & aMessageDigest);
+				while (h.length() < 2)
+					h = "0" + h;
+				hexString.append(h);
+			}
+			return hexString.toString();
+
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
 
 	public OnClickListener downloadDataClickListener = new OnClickListener() {
 
@@ -1691,6 +1757,9 @@ public class LoginActivity extends Activity {
 						.getString("id_type_customer");
 				String id_depo = oResponsealue.isNull("id_depo") ? null
 						: oResponsealue.getString("id_depo");
+				String password = oResponsealue.isNull("password") ? null
+						: oResponsealue.getString("password");
+
 				Log.d(LOG_TAG, "id_staff:" + id_staff);
 				Log.d(LOG_TAG, "nama_lengkap:" + nama_lengkap);
 				Log.d(LOG_TAG, "username:" + username);
@@ -1699,6 +1768,7 @@ public class LoginActivity extends Activity {
 				Log.d(LOG_TAG, "id_branch:" + id_branch);
 				Log.d(LOG_TAG, "id_type_customer:" + id_type_customer);
 				Log.d(LOG_TAG, "id_depo:" + id_depo);
+				Log.d(LOG_TAG, "password:" + password);
 				databaseHandler.add_Staff(new Staff(Integer.parseInt(id_staff),
 						nama_lengkap, userNameStaff, no_telp, passwordStaff,
 						Integer.parseInt(level), id_branch, id_type_customer,
@@ -1710,6 +1780,8 @@ public class LoginActivity extends Activity {
 				saveAppDataStaffIdWilayah(id_depo);
 				saveAppDataStaffIdDepo(id_depo);
 				saveAppDataStaffIdStaff(id_staff);
+				saveAppDataStaffpwd(password);
+
 			}
 			gotoMenuUtama();
 		} catch (JSONException e) {
@@ -1791,6 +1863,13 @@ public class LoginActivity extends Activity {
 		SharedPreferences sp = getSharedPrefereces();
 		Editor editor = sp.edit();
 		editor.putString(CONFIG.SHARED_PREFERENCES_STAFF_LEVEL, responsedata);
+		editor.commit();
+	}
+
+	public void saveAppDataStaffpwd(String responsedata) {
+		SharedPreferences sp = getSharedPrefereces();
+		Editor editor = sp.edit();
+		editor.putString(CONFIG.SHARED_PREFERENCES_STAFF_PASSWORD, responsedata);
 		editor.commit();
 	}
 

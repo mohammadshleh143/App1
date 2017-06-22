@@ -21,6 +21,9 @@ public class CONFIG {
 	public static final String CONFIG_APP_URL_UPLOAD_INSERT_SALES = "web_flg_mas/ws/insert_penjualan.php";
 	public static final String CONFIG_APP_URL_UPLOAD_INSERT_SALES_DETAIL = "web_flg_mas/ws/insert_penjualan_detail.php";
 
+	public static final String CONFIG_APP_URL_UPLOAD_INSERT_SALES_KANVAS = "web_flg_mas/ws/update_sales_kanvas.php";
+	public static final String CONFIG_APP_URL_UPLOAD_INSERT_SALES_KANVAS_DETAIL = "web_flg_mas/ws/update_sales_kanvas_detail.php";
+
 	////////////////////////////////
 	//186.132.0.58
 
@@ -40,14 +43,14 @@ public class CONFIG {
 
 	public static final String CONFIG_APP_FOLDER_PROMOSI = "promosi";
 	public static final String CONFIG_APP_FOLDER_PRODUCT = "product";
+	public static final String CONFIG_APP_FOLDER_STAFF = "staff";
 	public static final String CONFIG_APP_FOLDER_CUSTOMER = "customer";
 	public static final String CONFIG_APP_FOLDER_CUSTOMER_PROSPECT = "customer_prospect";
 	public static final String CONFIG_APP_FOLDER_REQ_LOAD = "Reqload";
 	public static final String CONFIG_APP_FOLDER_PHOTO_PURCHASE = "photo_purchase";
 	public static final String CONFIG_APP_FOLDER_DISPLAY_PRODUCT = "photo_display_product";
 	// public static final String CONFIG_APP_URL_PUBLIC = "http://mahkota.com/";
-	public static final String CONFIG_APP_URL_PUBLIC = "http://186.132.0.58" +
-			":8081/";
+	public static final String CONFIG_APP_URL_PUBLIC = "http://186.132.0.58"+":8081/";
 	public static final String CONFIG_APP_APP_FOLDER = "mahkota";
 	public static final String SHARED_PREFERENCES_NAME = "mahkota_android";
 
@@ -58,6 +61,8 @@ public class CONFIG {
 	public static final String SHARED_PREFERENCES_STAFF_ID_DEPO = "mahkota_staff_id_depo";
 	public static final String SHARED_PREFERENCES_STAFF_ID_STAFF = "mahkota_staff_id_staff";
 	public static final String SHARED_PREFERENCES_STAFF_LEVEL = "mahkota_staff_level";
+	public static final String SHARED_PREFERENCES_STAFF_PASSWORD = "mahkota_staff_pwd";
+	public static final String SHARED_PREFERENCES_STAFF_FOTO = "mahkota_staff_foto";
 
 	public static final String CONFIG_APP_URL_UPLOAD_INSERT_REQUEST_LOAD = "web_flg_mas/ws/insert_request_load.php";
 	public static final String CONFIG_APP_URL_UPLOAD_UPDATE_REQUEST_LOAD = "web_flg_mas/ws/update_request_load.php";
@@ -102,6 +107,7 @@ public class CONFIG {
 	public static final String CONFIG_APP_URL_DIR_IMG_CUSTOMER = "http://186.132.0.58" +
 			":8081/web_flg_mas/imgLib/customer/";
 	public static final String CONFIG_APP_URL_DOWNLOAD_CUSTOMER = "web_flg_mas/ws/get_customer.php";
+	public static final String CONFIG_APP_URL_DOWNLOAD_CUSTOMER_NOO = "web_flg_mas/ws/get_customer_noo.php";
 	public static final String SHARED_PREFERENCES_TABLE_CUSTOMER = "mahkota_table_customer";
 	public static final String SHARED_PREFERENCES_TABLE_CUSTOMER_SAME_DATA = "mahkota_table_customer_same_data";
 	public static final String SHARED_PREFERENCES_TABLE_CUSTOMER_ID_CUSTOMER = "mahkota_table_customer_id_customer";
@@ -117,11 +123,13 @@ public class CONFIG {
 
 	public static final String CONFIG_APP_URL_UPLOAD_LOGIN = "web_flg_mas/ws/login.php";
 	public static final String CONFIG_APP_URL_UPLOAD_CUSTOMER = "web_flg_mas/ws/update_customer.php";
+	public static final String CONFIG_APP_URL_UPLOAD_APPROVE_PROSPECT = "web_flg_mas/ws/update_approve_prospect.php";
 	public static final String CONFIG_APP_URL_UPLOAD_PRODUCT = "web_flg_mas/ws/update_product.php";
 	public static final String CONFIG_APP_URL_UPLOAD_JADWAL = "web_flg_mas/ws/update_jadwal.php";
 	public static final String CONFIG_APP_URL_UPLOAD_CUSTOMER_PROSPECT = "web_flg_mas/ws/update_customer_prospect1.php";
 	public static final String CONFIG_APP_URL_UPLOAD_PHOTO_PURCHASE = "web_flg_mas/ws/update_photo_purchase.php";
 	public static final String CONFIG_APP_URL_UPLOAD_SALES_ORDER = "web_flg_mas/ws/update_sales_order.php";
+	public static final String CONFIG_APP_URL_UPLOAD_SALES_KANVAS= "web_flg_mas/ws/update_sales_kanvas.php";
 	public static final String CONFIG_APP_URL_UPLOAD_REQ_LOAD = "web_flg_mas/ws/update_req_load.php";
 	public static final String CONFIG_APP_URL_UPLOAD_RETUR = "web_flg_mas/ws/update_retur.php";
 	public static final String CONFIG_APP_URL_UPLOAD_STOCK_ON_HAND = "web_flg_mas/ws/update_stock_on_hand.php";

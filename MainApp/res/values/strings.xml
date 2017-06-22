@@ -76,6 +76,8 @@
     <string name="app_inventory_menu_supplier_logs">Perbaikan</string>
     <string name="app_inventory_menu_sales_to">Sales TO</string>
     <string name="app_inventory_menu_sales_kanvas">Sales Kanvas</string>
+    <string name="app_inventory_menu_belum">Belum Ada</string>
+    <string name="app_inventory_menu_approv_noo">Approval NOO</string>
     <string name="app_inventory_menu_sales_survey">Survey</string>
     <string name="app_inventory_sales_nomer_nota">Nomer NOTA</string>
     <string name="app_inventory_sales_alamat">Alamat</string>
@@ -209,8 +211,6 @@
     <string name="menu_4">New Open Outlet (NOO)</string>
     <string name="menu_5">Lokasi Customer</string>
     <string name="menu_6">Sales Order</string>
-    <string name="menu_15">Request Load</string>
-    <string name="menu_16">Master Harga</string>
     <string name="menu_7">Stock On Hand</string>
     <string name="menu_8">Photo Display Product</string>
     <string name="menu_9">Supervisor</string>
@@ -219,6 +219,10 @@
     <string name="menu_12">Merchandise (Belum Aktif)</string>
     <string name="menu_13">Check Customer Uploaded</string>
     <string name="menu_14">Check Prospect Uploaded</string>
+    <string name="menu_15">Request Load</string>
+    <string name="menu_16">Approval NOO</string>
+    <string name="menu_17">Upload Kanvas</string>
+    <string name="menu_18">Upload Kanvas 1</string>
     <!-- Customer -->
     <string name="app_customer_hint_search_customer">Search Customer</string>
     <string name="app_customer_hint_kode_customer">Kode Customer</string>
@@ -293,7 +297,8 @@
     <string name="app_customer_hint_keterangan_image">Masukkan Keterangan Image</string>
     <string name="app_customer_hint_keterangan">Keterangan</string>
     <string name="app_customer_no_text_search">Please input text to Search Name</string>
-    <string name="app_customer_gps_location">GPS Location</string>
+    <string name="app_customer_gps_location">Lokasi Customer</string>
+    <string name="app_customer_validation">Validasi Password</string>
     <string name="app_customer_image_location">Foto</string>
     <string name="app_customer_image_location_1">Foto 1</string>
     <string name="app_customer_image_location_2">Foto 2</string>
@@ -427,11 +432,13 @@
     <string name="app_sales_order_failed_please_add_dus">Jumlah dus harus diisi</string>
     <string name="app_sales_order_failed_please_add_another_item">Mohon masukkan item yang lain !</string>
     <string name="app_sales_order_save_success">Sales Order berhasil di tambah !</string>
+    <string name="app_kanvas_save_success">Kanvas berhasil di tambah !</string>
     <string name="app_req_load_save_success">Request Stock VAN berhasil di tambah !</string>
     <string name="app_sales_order_update_success">Sales Order berhasil di ubah !</string>
     <string name="app_sales_order_processing_upload_empty">Mohon periksa koneksi internet anda, untuk mengupload sales order customer !</string>
     <string name="app_processing_upload_empty">Mohon periksa koneksi internet anda!</string>
     <string name="app_sales_order_processing_upload_no_data">Tidak ada data Sales Order yang di input oleh user !</string>
+    <string name="app_kanvas_processing_upload_no_data">Tidak ada data kanvas yang di input oleh user !</string>
     <string name="app_reqload_processing_upload_no_data">Tidak ada data Request Kanvas yang di input oleh user !</string>
     <string name="app_req_load_processing_upload_no_data">Tidak ada data req load yang di input oleh user !</string>
     <string name="app_sales_order_processing_upload_failed">Proses upload sales order customer gagal !</string>
@@ -440,10 +447,12 @@
     <string name="app_req_load2_processing_upload_failed">Proses upload req load 2 customer gagal !</string>
     <string name="app_retur_processing_upload_failed">Proses upload retur gagal !</string>
     <string name="app_sales_order_processing_upload_success">Proses upload sales order customer berhasil !</string>
+    <string name="app_KANVAS_processing_upload_success">Proses upload kanvas customer berhasil !</string>
     <string name="app_reqload_processing_upload_success">Proses upload req stok kanvas berhasil !</string>
     <string name="app_req_load_processing_upload_success">Proses upload Req Load customer berhasil !</string>
     <string name="app_retur_processing_upload_success">Proses upload retur customer berhasil !</string>
     <string name="app_sales_order_processing_upload">Proses Upload Sales Order</string>
+    <string name="app_kanvas_processing_upload">Proses Upload Sales Kanvas</string>
     <string name="app_reqload_processing_upload">Proses Upload Request Kanvas</string>
     <string name="app_req_load_processing_upload">Proses Upload Req Load</string>
     <!-- Stock On Hand -->
@@ -539,6 +548,7 @@
     <string name="MSG_DLG_LABEL_SAVE_ORDER_EMPTY">Data Order Tidak Boleh Kosong</string>
     <string name="MSG_DLG_LABEL_UPDATE_GPS_PROSPECT_DIALOG">Anda ingin mengupdate lokasi customer prospect?</string>
     <string name="MSG_DLG_LABEL_FAILED_GPS_DIALOG">Koordinat GPS salah ! Mohon periksa koneksi GPS !</string>
+    <string name="MSG_DLG_LABEL_NOVALID_PWD">Password approval anda tidak valid</string>
     <string name="MSG_DLG_LABEL_EXIT_DIALOG">Apakah anda yakin keluar dari aplikasi ?</string>
     <string name="MSG_DLG_LABEL_TITLE_DIALOG">Keluar Aplikasi</string>
     <string name="MSG_DLG_LABEL_CHECK_INTERNET_CONNECTION">Mohon cek koneksi internet.\ndan coba lagi.</string>
@@ -618,5 +628,7 @@
     <string name="app_sales_to_failed_no_nama">Mohon masukkan nama</string>
     <string name="app_sales_to_failed_no_alamat">Mohon masukkan alamat</string>
     <string name="app_sales_to_failed_no_keterangan">Mohon masukkan keterangan</string>
+    <string name="app_sales_to_failed_no_foto">Mohon mengambil Foto outlet</string>
+    <string name="app_sales_to_failed_no_ttd">Mohon mengambil TTD pembeli</string>
 
 </resources>

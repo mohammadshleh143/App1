@@ -37,18 +37,17 @@ import com.mahkota_company.android.R;
 import com.mahkota_company.android.chat.Splashscreen;
 import com.mahkota_company.android.check_customer.CheckCustomer;
 import com.mahkota_company.android.check_new_prospect.CheckCustomerProspectActivity;
-import com.mahkota_company.android.contact.ContactActivty;
-import com.mahkota_company.android.contact.SuperVisor;
+import com.mahkota_company.android.inventory.Kanvas_Uploaded;
+import com.mahkota_company.android.supervisor.SuperVisor;
+import com.mahkota_company.android.customer_noo.customer.DetailEditCustomerNoo;
 import com.mahkota_company.android.database.Customer;
 import com.mahkota_company.android.database.DatabaseHandler;
-import com.mahkota_company.android.database.Request_load;
 import com.mahkota_company.android.display_product.DisplayProductActivity;
 
 import com.mahkota_company.android.inventory.InventoryActivity;
 import com.mahkota_company.android.inventory.RequestActivity;
 import com.mahkota_company.android.jadwal.JadwalActivity;
 import com.mahkota_company.android.locator.LocatorActivity;
-import com.mahkota_company.android.merchandise.CustomerMerchandiseActivity;
 import com.mahkota_company.android.product.ProductActivity;
 import com.mahkota_company.android.prospect.CustomerProspectActivity;
 import com.mahkota_company.android.retur.ReturActivity;
@@ -68,6 +67,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -115,7 +115,7 @@ public class CustomerActivity extends ActionBarActivity implements
 	private TextView tvNamaAlamat;
     private String response;
     private Customer customer;
-	private Button chat;
+	private Button chat,map;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +132,6 @@ public class CustomerActivity extends ActionBarActivity implements
 		tvNamaCustomer.setTypeface(typefaceSmall);
 		tvNamaAlamat.setTypeface(typefaceSmall);
 		chat = (Button) findViewById(R.id.chat);
-
 		act = this;
 		setSupportActionBar(mToolbar);
 		getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -156,7 +155,14 @@ public class CustomerActivity extends ActionBarActivity implements
 
 		if (countCustomer == 0) {
 			if (GlobalApp.checkInternetConnection(act)) {
-				new DownloadDataCustomer().execute();
+				SharedPreferences spPreferences = getSharedPrefereces();
+				String main_app_staff_level = spPreferences.getString(CONFIG.SHARED_PREFERENCES_STAFF_LEVEL, null);
+				int levelStaff = Integer.parseInt(main_app_staff_level);
+				if(levelStaff<=2){
+					new DownloadDataCustomer12().execute();
+				}else{
+					new DownloadDataCustomer().execute();
+				}
 			} else {
 				String message = act.getApplicationContext().getResources()
 						.getString(R.string.app_customer_processing_empty);
@@ -316,137 +322,271 @@ public class CustomerActivity extends ActionBarActivity implements
 					}
 
 				} else {
-					customer_list.clear();
 					SharedPreferences spPreferences = getSharedPrefereces();
-					String main_app_staff_id_wilayah = spPreferences.getString(
-							CONFIG.SHARED_PREFERENCES_STAFF_ID_WILAYAH, null);
-					ArrayList<Customer> customer_from_db = databaseHandler
-							.getAllCustomerActive(Integer
-									.parseInt(main_app_staff_id_wilayah));
-					if (customer_from_db.size() > 0) {
-						listview.setVisibility(View.VISIBLE);
-						for (int i = 0; i < customer_from_db.size(); i++) {
-							int id_customer = customer_from_db.get(i)
-									.getId_customer();
-							String kode_customer = customer_from_db.get(i)
-									.getKode_customer();
-							String email = customer_from_db.get(i).getEmail();
-							String alamat = customer_from_db.get(i).getAlamat();
-							String lats = customer_from_db.get(i).getLats();
-							String longs = customer_from_db.get(i).getLongs();
-							String nama_lengkap = customer_from_db.get(i)
-									.getNama_lengkap();
-							String no_telp = customer_from_db.get(i)
-									.getNo_telp();
-							int id_wilayah = customer_from_db.get(i)
-									.getId_wilayah();
-							String foto1 = customer_from_db.get(i).getFoto_1();
-							String foto2 = customer_from_db.get(i).getFoto_2();
-							String foto3 = customer_from_db.get(i).getFoto_3();
-							int id_type = customer_from_db.get(i)
-									.getId_type_customer();
-							String blockir = customer_from_db.get(i)
-									.getBlokir();
-							String date = customer_from_db.get(i).getDate();
-							int id_staff = customer_from_db.get(i)
-									.getId_staff();
-							String no_ktp = customer_from_db.get(i)
-									.getNo_ktp();
-							String tanggal_lahir = customer_from_db.get(i)
-									.getTanggal_lahir();
-							String nama_bank = customer_from_db.get(i)
-									.getNama_bank();
-                            String no_rekening = customer_from_db.get(i)
-                                    .getNo_rekening();
-                            String atas_nama = customer_from_db.get(i)
-                                    .getAtas_nama();
-                            String npwp = customer_from_db.get(i)
-                                    .getNpwp();
-                            String nama_pasar = customer_from_db.get(i)
-                                    .getNama_pasar();
-                            int id_cluster = customer_from_db.get(i)
-                                    .getId_cluster();
-                            String telp = customer_from_db.get(i)
-                                    .getTelp();
-                            String fax = customer_from_db.get(i)
-                                    .getFax();
-                            String omset = customer_from_db.get(i)
-                                    .getOmset();
-                            String cara_pembayaran = customer_from_db.get(i)
-                                    .getCara_pembayaran();
-                            String plafon_kredit = customer_from_db.get(i)
-                                    .getPlafon_kredit();
-                            String term_kredit = customer_from_db.get(i)
-                                    .getTerm_kredit();
-							String nama_istri = customer_from_db.get(i)
-									.getNama_istri();
-							String nama_anak1 = customer_from_db.get(i)
-									.getNama_anak1();
-							String nama_anak2 = customer_from_db.get(i)
-									.getNama_anak2();
-							String nama_anak3 = customer_from_db.get(i)
-									.getNama_anak3();
-                            String kode_pos = customer_from_db.get(i)
-                                    .getKode_pos();
-							int id_depo = customer_from_db.get(i)
-								.getId_depo();
-							String isactive = customer_from_db.get(i)
-									.getIsactive();
-							String description = customer_from_db.get(i)
-									.getDescription();
-                            String nama_toko = customer_from_db.get(i)
-                                    .getNama_toko();
+					String main_app_staff_level = spPreferences.getString(CONFIG.SHARED_PREFERENCES_STAFF_LEVEL, null);
+					int levelStaff = Integer.parseInt(main_app_staff_level);
 
-							Customer customer = new Customer();
-							customer.setId_customer(id_customer);
-							customer.setKode_customer(kode_customer);
-							customer.setEmail(email);
-							customer.setAlamat(alamat);
-							customer.setLats(lats);
-							customer.setLongs(longs);
-							customer.setNama_lengkap(nama_lengkap);
-							customer.setNo_telp(no_telp);
-							customer.setId_wilayah(id_wilayah);
-							customer.setFoto_1(foto1);
-							customer.setFoto_2(foto2);
-							customer.setFoto_3(foto3);
-							customer.setId_type_customer(id_type);
-							customer.setBlokir(blockir);
-							customer.setDate(date);
-							customer.setId_staff(id_staff);
-							customer.setNo_ktp(no_ktp);
-							customer.setTanggal_lahir(tanggal_lahir);
-							customer.setNama_bank(nama_bank);
-                            customer.setNo_rekening(no_rekening);
-                            customer.setAtas_nama(atas_nama);
-                            customer.setNpwp(npwp);
-                            customer.setNama_pasar(nama_pasar);
-                            customer.setId_cluster(id_cluster);
-                            customer.setTelp(telp);
-                            customer.setFax(fax);
-                            customer.setOmset(omset);
-                            customer.setCara_pembayaran(cara_pembayaran);
-                            customer.setPlafon_kredit(plafon_kredit);
-                            customer.setTerm_kredit(term_kredit);
-							customer.setNama_istri(nama_istri);
-							customer.setNama_anak1(nama_anak1);
-							customer.setNama_anak2(nama_anak2);
-							customer.setNama_anak3(nama_anak3);
-                            customer.setKode_pos(kode_pos);
-							customer.setId_depo(id_depo);
-							customer.setIsactive(isactive);
-							customer.setDescription(description);
-                            customer.setNama_toko(nama_toko);
+					if (levelStaff<=2){
+						customer_list.clear();
+						ArrayList<Customer> customer_from_db = databaseHandler
+								.getAllCustomerNoo();
+						if (customer_from_db.size() > 0) {
+							listview.setVisibility(View.VISIBLE);
+							for (int i = 0; i < customer_from_db.size(); i++) {
+								int id_customer = customer_from_db.get(i)
+										.getId_customer();
+								String kode_customer = customer_from_db.get(i)
+										.getKode_customer();
+								String email = customer_from_db.get(i).getEmail();
+								String alamat = customer_from_db.get(i).getAlamat();
+								String lats = customer_from_db.get(i).getLats();
+								String longs = customer_from_db.get(i).getLongs();
+								String nama_lengkap = customer_from_db.get(i)
+										.getNama_lengkap();
+								String no_telp = customer_from_db.get(i)
+										.getNo_telp();
+								int id_wilayah = customer_from_db.get(i)
+										.getId_wilayah();
+								String foto1 = customer_from_db.get(i).getFoto_1();
+								String foto2 = customer_from_db.get(i).getFoto_2();
+								String foto3 = customer_from_db.get(i).getFoto_3();
+								int id_type = customer_from_db.get(i)
+										.getId_type_customer();
+								String blockir = customer_from_db.get(i)
+										.getBlokir();
+								String date = customer_from_db.get(i).getDate();
+								int id_staff = customer_from_db.get(i)
+										.getId_staff();
+								String no_ktp = customer_from_db.get(i)
+										.getNo_ktp();
+								String tanggal_lahir = customer_from_db.get(i)
+										.getTanggal_lahir();
+								String nama_bank = customer_from_db.get(i)
+										.getNama_bank();
+								String no_rekening = customer_from_db.get(i)
+										.getNo_rekening();
+								String atas_nama = customer_from_db.get(i)
+										.getAtas_nama();
+								String npwp = customer_from_db.get(i)
+										.getNpwp();
+								String nama_pasar = customer_from_db.get(i)
+										.getNama_pasar();
+								int id_cluster = customer_from_db.get(i)
+										.getId_cluster();
+								String telp = customer_from_db.get(i)
+										.getTelp();
+								String fax = customer_from_db.get(i)
+										.getFax();
+								String omset = customer_from_db.get(i)
+										.getOmset();
+								String cara_pembayaran = customer_from_db.get(i)
+										.getCara_pembayaran();
+								String plafon_kredit = customer_from_db.get(i)
+										.getPlafon_kredit();
+								String term_kredit = customer_from_db.get(i)
+										.getTerm_kredit();
+								String nama_istri = customer_from_db.get(i)
+										.getNama_istri();
+								String nama_anak1 = customer_from_db.get(i)
+										.getNama_anak1();
+								String nama_anak2 = customer_from_db.get(i)
+										.getNama_anak2();
+								String nama_anak3 = customer_from_db.get(i)
+										.getNama_anak3();
+								String kode_pos = customer_from_db.get(i)
+										.getKode_pos();
+								int id_depo = customer_from_db.get(i)
+										.getId_depo();
+								String isactive = customer_from_db.get(i)
+										.getIsactive();
+								String description = customer_from_db.get(i)
+										.getDescription();
+								String nama_toko = customer_from_db.get(i)
+										.getNama_toko();
 
-							customer_list.add(customer);
+								Customer customer = new Customer();
+								customer.setId_customer(id_customer);
+								customer.setKode_customer(kode_customer);
+								customer.setEmail(email);
+								customer.setAlamat(alamat);
+								customer.setLats(lats);
+								customer.setLongs(longs);
+								customer.setNama_lengkap(nama_lengkap);
+								customer.setNo_telp(no_telp);
+								customer.setId_wilayah(id_wilayah);
+								customer.setFoto_1(foto1);
+								customer.setFoto_2(foto2);
+								customer.setFoto_3(foto3);
+								customer.setId_type_customer(id_type);
+								customer.setBlokir(blockir);
+								customer.setDate(date);
+								customer.setId_staff(id_staff);
+								customer.setNo_ktp(no_ktp);
+								customer.setTanggal_lahir(tanggal_lahir);
+								customer.setNama_bank(nama_bank);
+								customer.setNo_rekening(no_rekening);
+								customer.setAtas_nama(atas_nama);
+								customer.setNpwp(npwp);
+								customer.setNama_pasar(nama_pasar);
+								customer.setId_cluster(id_cluster);
+								customer.setTelp(telp);
+								customer.setFax(fax);
+								customer.setOmset(omset);
+								customer.setCara_pembayaran(cara_pembayaran);
+								customer.setPlafon_kredit(plafon_kredit);
+								customer.setTerm_kredit(term_kredit);
+								customer.setNama_istri(nama_istri);
+								customer.setNama_anak1(nama_anak1);
+								customer.setNama_anak2(nama_anak2);
+								customer.setNama_anak3(nama_anak3);
+								customer.setKode_pos(kode_pos);
+								customer.setId_depo(id_depo);
+								customer.setIsactive(isactive);
+								customer.setDescription(description);
+								customer.setNama_toko(nama_toko);
+
+								customer_list.add(customer);
+							}
+
+							cAdapter = new ListViewAdapter(CustomerActivity.this,
+									R.layout.list_item_customer, customer_list);
+							listview.setAdapter(cAdapter);
+							cAdapter.notifyDataSetChanged();
+						} else {
+							listview.setVisibility(View.INVISIBLE);
 						}
+					}else{
+						customer_list.clear();
+						String main_app_staff_id_wilayah = spPreferences.getString(
+								CONFIG.SHARED_PREFERENCES_STAFF_ID_WILAYAH, null);
+						ArrayList<Customer> customer_from_db = databaseHandler
+								.getAllCustomerActive(Integer
+										.parseInt(main_app_staff_id_wilayah));
+						if (customer_from_db.size() > 0) {
+							listview.setVisibility(View.VISIBLE);
+							for (int i = 0; i < customer_from_db.size(); i++) {
+								int id_customer = customer_from_db.get(i)
+										.getId_customer();
+								String kode_customer = customer_from_db.get(i)
+										.getKode_customer();
+								String email = customer_from_db.get(i).getEmail();
+								String alamat = customer_from_db.get(i).getAlamat();
+								String lats = customer_from_db.get(i).getLats();
+								String longs = customer_from_db.get(i).getLongs();
+								String nama_lengkap = customer_from_db.get(i)
+										.getNama_lengkap();
+								String no_telp = customer_from_db.get(i)
+										.getNo_telp();
+								int id_wilayah = customer_from_db.get(i)
+										.getId_wilayah();
+								String foto1 = customer_from_db.get(i).getFoto_1();
+								String foto2 = customer_from_db.get(i).getFoto_2();
+								String foto3 = customer_from_db.get(i).getFoto_3();
+								int id_type = customer_from_db.get(i)
+										.getId_type_customer();
+								String blockir = customer_from_db.get(i)
+										.getBlokir();
+								String date = customer_from_db.get(i).getDate();
+								int id_staff = customer_from_db.get(i)
+										.getId_staff();
+								String no_ktp = customer_from_db.get(i)
+										.getNo_ktp();
+								String tanggal_lahir = customer_from_db.get(i)
+										.getTanggal_lahir();
+								String nama_bank = customer_from_db.get(i)
+										.getNama_bank();
+								String no_rekening = customer_from_db.get(i)
+										.getNo_rekening();
+								String atas_nama = customer_from_db.get(i)
+										.getAtas_nama();
+								String npwp = customer_from_db.get(i)
+										.getNpwp();
+								String nama_pasar = customer_from_db.get(i)
+										.getNama_pasar();
+								int id_cluster = customer_from_db.get(i)
+										.getId_cluster();
+								String telp = customer_from_db.get(i)
+										.getTelp();
+								String fax = customer_from_db.get(i)
+										.getFax();
+								String omset = customer_from_db.get(i)
+										.getOmset();
+								String cara_pembayaran = customer_from_db.get(i)
+										.getCara_pembayaran();
+								String plafon_kredit = customer_from_db.get(i)
+										.getPlafon_kredit();
+								String term_kredit = customer_from_db.get(i)
+										.getTerm_kredit();
+								String nama_istri = customer_from_db.get(i)
+										.getNama_istri();
+								String nama_anak1 = customer_from_db.get(i)
+										.getNama_anak1();
+								String nama_anak2 = customer_from_db.get(i)
+										.getNama_anak2();
+								String nama_anak3 = customer_from_db.get(i)
+										.getNama_anak3();
+								String kode_pos = customer_from_db.get(i)
+										.getKode_pos();
+								int id_depo = customer_from_db.get(i)
+										.getId_depo();
+								String isactive = customer_from_db.get(i)
+										.getIsactive();
+								String description = customer_from_db.get(i)
+										.getDescription();
+								String nama_toko = customer_from_db.get(i)
+										.getNama_toko();
 
-						cAdapter = new ListViewAdapter(CustomerActivity.this,
-								R.layout.list_item_customer, customer_list);
-						listview.setAdapter(cAdapter);
-						cAdapter.notifyDataSetChanged();
-					} else {
-						listview.setVisibility(View.INVISIBLE);
+								Customer customer = new Customer();
+								customer.setId_customer(id_customer);
+								customer.setKode_customer(kode_customer);
+								customer.setEmail(email);
+								customer.setAlamat(alamat);
+								customer.setLats(lats);
+								customer.setLongs(longs);
+								customer.setNama_lengkap(nama_lengkap);
+								customer.setNo_telp(no_telp);
+								customer.setId_wilayah(id_wilayah);
+								customer.setFoto_1(foto1);
+								customer.setFoto_2(foto2);
+								customer.setFoto_3(foto3);
+								customer.setId_type_customer(id_type);
+								customer.setBlokir(blockir);
+								customer.setDate(date);
+								customer.setId_staff(id_staff);
+								customer.setNo_ktp(no_ktp);
+								customer.setTanggal_lahir(tanggal_lahir);
+								customer.setNama_bank(nama_bank);
+								customer.setNo_rekening(no_rekening);
+								customer.setAtas_nama(atas_nama);
+								customer.setNpwp(npwp);
+								customer.setNama_pasar(nama_pasar);
+								customer.setId_cluster(id_cluster);
+								customer.setTelp(telp);
+								customer.setFax(fax);
+								customer.setOmset(omset);
+								customer.setCara_pembayaran(cara_pembayaran);
+								customer.setPlafon_kredit(plafon_kredit);
+								customer.setTerm_kredit(term_kredit);
+								customer.setNama_istri(nama_istri);
+								customer.setNama_anak1(nama_anak1);
+								customer.setNama_anak2(nama_anak2);
+								customer.setNama_anak3(nama_anak3);
+								customer.setKode_pos(kode_pos);
+								customer.setId_depo(id_depo);
+								customer.setIsactive(isactive);
+								customer.setDescription(description);
+								customer.setNama_toko(nama_toko);
+
+								customer_list.add(customer);
+							}
+
+							cAdapter = new ListViewAdapter(CustomerActivity.this,
+									R.layout.list_item_customer, customer_list);
+							listview.setAdapter(cAdapter);
+							cAdapter.notifyDataSetChanged();
+						} else {
+							listview.setVisibility(View.INVISIBLE);
+						}
 					}
 				}
 			}
@@ -508,11 +648,118 @@ public class CustomerActivity extends ActionBarActivity implements
 		@Override
 		protected String doInBackground(String... params) {
 			SharedPreferences spPreferences = getSharedPrefereces();
+
 			String main_app_id_depo = spPreferences.getString(
 					CONFIG.SHARED_PREFERENCES_STAFF_ID_DEPO, null);
 			String download_data_url = CONFIG.CONFIG_APP_URL_PUBLIC
 					+ CONFIG.CONFIG_APP_URL_DOWNLOAD_CUSTOMER + "?id_depo="
 					+ main_app_id_depo;
+			HttpResponse response = getDownloadData(download_data_url);
+
+			int retCode = (response != null) ? response.getStatusLine()
+					.getStatusCode() : -1;
+			if (retCode != 200) {
+				message = act.getApplicationContext().getResources()
+						.getString(R.string.MSG_DLG_LABEL_URL_NOT_FOUND);
+				handler.post(new Runnable() {
+					public void run() {
+						showCustomDialog(message);
+					}
+				});
+			} else {
+				try {
+					response_data = EntityUtils.toString(response.getEntity());
+
+					//SharedPreferences spPreferences = getSharedPrefereces();
+					String main_app_table_data = spPreferences.getString(
+							CONFIG.SHARED_PREFERENCES_TABLE_CUSTOMER, null);
+					if (main_app_table_data != null) {
+						if (main_app_table_data.equalsIgnoreCase(response_data)) {
+							saveAppDataCustomerSameData(act
+									.getApplicationContext().getResources()
+									.getString(R.string.app_value_true));
+						} else {
+							databaseHandler.deleteTableCustomer();
+							saveAppDataCustomerSameData(act
+									.getApplicationContext().getResources()
+									.getString(R.string.app_value_false));
+						}
+					} else {
+						databaseHandler.deleteTableCustomer();
+						saveAppDataCustomerSameData(act.getApplicationContext()
+								.getResources()
+								.getString(R.string.app_value_false));
+					}
+				} catch (ParseException e) {
+					message = e.toString();
+					handler.post(new Runnable() {
+						public void run() {
+							showCustomDialog(message);
+						}
+					});
+				} catch (IOException e) {
+					message = e.toString();
+					handler.post(new Runnable() {
+						public void run() {
+							showCustomDialog(message);
+						}
+					});
+				}
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			if (response_data != null) {
+				saveAppDataCustomer(response_data);
+				extractDataCustomer();
+				message = act
+						.getApplicationContext()
+						.getResources()
+						.getString(
+								R.string.MSG_DLG_LABEL_SYNRONISASI_DATA_SUCCESS);
+				showCustomDialogDownloadSuccess(message);
+			} else {
+				message = act.getApplicationContext().getResources()
+						.getString(R.string.MSG_DLG_LABEL_DOWNLOAD_FAILED);
+				handler.post(new Runnable() {
+					public void run() {
+						showCustomDialog(message);
+					}
+				});
+			}
+		}
+	}
+
+	private class DownloadDataCustomer12 extends
+			AsyncTask<String, Integer, String> {
+		@Override
+		protected void onPreExecute() {
+			progressDialog.setMessage(getApplicationContext().getResources()
+					.getString(R.string.app_customer_processing));
+			progressDialog.show();
+			progressDialog
+					.setOnCancelListener(new DialogInterface.OnCancelListener() {
+						@Override
+						public void onCancel(DialogInterface dialog) {
+							String msg = getApplicationContext()
+									.getResources()
+									.getString(
+											R.string.MSG_DLG_LABEL_SYNRONISASI_DATA_CANCEL);
+							showCustomDialog(msg);
+						}
+					});
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+			SharedPreferences spPreferences = getSharedPrefereces();
+			//String main_app_id_depo = spPreferences.getString(
+			//		CONFIG.SHARED_PREFERENCES_STAFF_ID_DEPO, null);
+			String download_data_url = CONFIG.CONFIG_APP_URL_PUBLIC
+					+ CONFIG.CONFIG_APP_URL_DOWNLOAD_CUSTOMER_NOO;
 			HttpResponse response = getDownloadData(download_data_url);
 			int retCode = (response != null) ? response.getStatusLine()
 					.getStatusCode() : -1;
@@ -618,7 +865,8 @@ public class CustomerActivity extends ActionBarActivity implements
 	}
 
     ////////////////////////////////////////////////////////////////////
-    private class DownloadDataCustomer1 extends AsyncTask<String, Integer, String> {
+
+	private class DownloadDataCustomer1 extends AsyncTask<String, Integer, String> {
         @Override
         protected void onPreExecute() {
             progressDialog.setMessage(getApplicationContext().getResources()
@@ -707,7 +955,7 @@ public class CustomerActivity extends ActionBarActivity implements
                         .getResources()
                         .getString(
                                 R.string.MSG_DLG_LABEL_SYNRONISASI_DATA_SUCCESS);
-                showCustomDialogDownloadSuccess1(message);
+                showCustomDialogDownloadSuccess(message);
             } else {
                 message = act.getApplicationContext().getResources()
                         .getString(R.string.MSG_DLG_LABEL_DOWNLOAD_FAILED);
@@ -720,6 +968,8 @@ public class CustomerActivity extends ActionBarActivity implements
         }
     }
 
+
+	/*
     public void showCustomDialogDownloadSuccess1(String msg) {
         if (progressDialog != null) {
             progressDialog.dismiss();
@@ -744,8 +994,8 @@ public class CustomerActivity extends ActionBarActivity implements
                         });
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
-
     }
+	*/
 
 	public void extractDataCustomer() {
 		SharedPreferences spPreferences = getSharedPrefereces();
@@ -1296,11 +1546,11 @@ public class CustomerActivity extends ActionBarActivity implements
 				CONFIG.SHARED_PREFERENCES_STAFF_LEVEL, null);
 		int levelStaff = Integer.parseInt(main_app_staff_level);
 		ArrayList<Customer> customer_from_db = null;
-		if (levelStaff > 2) {
+		if (levelStaff <= 2) {
+			customer_from_db = databaseHandler.getAllCustomerNoo();
+		} else {
 			customer_from_db = databaseHandler.getAllCustomerActive(Integer
 					.parseInt(main_app_staff_id_wilayah));
-		} else {
-			customer_from_db = databaseHandler.getAllCustomerActive();
 		}
 		if (customer_from_db.size() > 0) {
 			listview.setVisibility(View.VISIBLE);
@@ -1396,7 +1646,14 @@ public class CustomerActivity extends ActionBarActivity implements
 			if (GlobalApp.checkInternetConnection(act)) {
 				int countUpload = databaseHandler.getCountCustomerWhereValidAndUpdateAll();
 				if(countUpload == 0){
-					new DownloadDataCustomer().execute();
+					SharedPreferences spPreferences = getSharedPrefereces();
+					String main_app_staff_level = spPreferences.getString(CONFIG.SHARED_PREFERENCES_STAFF_LEVEL, null);
+					int levelStaff = Integer.parseInt(main_app_staff_level);
+					if(levelStaff<=2){
+						new DownloadDataCustomer12().execute();
+					}else{
+						new DownloadDataCustomer().execute();
+					}
 				}else{
 					String message = act
 							.getApplicationContext()
@@ -1413,28 +1670,67 @@ public class CustomerActivity extends ActionBarActivity implements
 			}
 			return true;
 		case R.id.menu_upload:
-			if (GlobalApp.checkInternetConnection(act)) {
-				int countUpload = databaseHandler
-						.getCountCustomerWhereValidAndUpdate();
-				if (countUpload == 0) {
+			SharedPreferences spPreferences = getSharedPrefereces();
+			String main_app_staff_level = spPreferences.getString(CONFIG.SHARED_PREFERENCES_STAFF_LEVEL, null);
+			int levelStaff = Integer.parseInt(main_app_staff_level);
+
+			if(levelStaff<=2){
+				if (GlobalApp.checkInternetConnection(act)) {
+					int countUpload = databaseHandler.getCountCustomerWhereValidAndUpdateProspect();
+					if (countUpload == 0) {
+						String message = act
+								.getApplicationContext()
+								.getResources()
+								.getString(
+										R.string.app_customer_processing_upload_no_data);
+						showCustomDialog(message);
+					} else {
+
+						if(levelStaff<=2){
+							new UploadDataProspect().execute();
+						}else{
+							new UploadData().execute();
+						}
+					}
+				} else {
 					String message = act
 							.getApplicationContext()
 							.getResources()
 							.getString(
-									R.string.app_customer_processing_upload_no_data);
+									R.string.app_customer_processing_upload_empty);
 					showCustomDialog(message);
-				} else {
-					new UploadData().execute();
 				}
-			} else {
-				String message = act
-						.getApplicationContext()
-						.getResources()
-						.getString(
-								R.string.app_customer_processing_upload_empty);
-				showCustomDialog(message);
+				return true;
+			}else{
+				if (GlobalApp.checkInternetConnection(act)) {
+					int countUpload = databaseHandler
+							.getCountCustomerWhereValidAndUpdate();
+					if (countUpload == 0) {
+						String message = act
+								.getApplicationContext()
+								.getResources()
+								.getString(
+										R.string.app_customer_processing_upload_no_data);
+						showCustomDialog(message);
+					} else {
+
+						if(levelStaff<=2){
+							new UploadDataProspect().execute();
+						}else{
+							new UploadData().execute();
+						}
+					}
+				} else {
+					String message = act
+							.getApplicationContext()
+							.getResources()
+							.getString(
+									R.string.app_customer_processing_upload_empty);
+					showCustomDialog(message);
+				}
+				return true;
 			}
-			return true;
+
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -1646,6 +1942,95 @@ public class CustomerActivity extends ActionBarActivity implements
 
 	}
 
+	public class UploadDataProspect extends AsyncTask<String, Integer, String> {
+		@Override
+		protected void onPreExecute() {
+			progressDialog.setMessage(getApplicationContext().getResources()
+					.getString(R.string.app_customer_processing_upload));
+			progressDialog.show();
+			progressDialog
+					.setOnCancelListener(new DialogInterface.OnCancelListener() {
+						@Override
+						public void onCancel(DialogInterface dialog) {
+							String msg = getApplicationContext()
+									.getResources()
+									.getString(
+											R.string.MSG_DLG_LABEL_SYNRONISASI_DATA_CANCEL);
+							showCustomDialog(msg);
+						}
+					});
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+			String upload_url = CONFIG.CONFIG_APP_URL_PUBLIC
+					+ CONFIG.CONFIG_APP_URL_UPLOAD_APPROVE_PROSPECT ;
+
+			List<Customer> dataUpload = databaseHandler
+					.getAllCustomerActiveAndUpdateProspect();
+			for (Customer customer : dataUpload) {
+				response = uploadCustomer(upload_url,
+						customer.getKode_customer(),
+						customer.getEmail(),
+						customer.getAlamat(),
+						customer.getLats(),
+						customer.getLongs(),
+						customer.getNama_lengkap(),
+						customer.getNo_telp(),
+						String.valueOf(customer.getId_wilayah()),
+						customer.getFoto_1(),
+						customer.getFoto_2(),
+						customer.getFoto_3(),
+						String.valueOf(customer.getId_type_customer()),
+						customer.getDate(),
+						customer.getNo_ktp(),
+						customer.getTanggal_lahir(),
+						customer.getNama_bank(),
+						customer.getNo_rekening(),
+						customer.getAtas_nama(),
+						customer.getNpwp(),
+						customer.getNama_pasar(),
+						String.valueOf(customer.getId_cluster()),
+						customer.getTelp(),
+						customer.getFax(),
+						customer.getOmset(),
+						customer.getCara_pembayaran(),
+						customer.getPlafon_kredit(),
+						customer.getTerm_kredit(),
+						customer.getNama_istri(),
+						customer.getNama_anak1(),
+						customer.getNama_anak2(),
+						customer.getNama_anak3(),
+						customer.getKode_pos(),
+						String.valueOf(customer.getId_depo()),
+						customer.getIsactive(),
+						customer.getDescription(),
+						customer.getNama_toko(),
+						String.valueOf(customer.getId_staff()));
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+
+
+			super.onPostExecute(result);
+			if (response_data != null) {
+				//initUploadCustomer();
+			} else {
+				final String msg = act
+						.getApplicationContext()
+						.getResources()
+						.getString(
+								R.string.app_customer_processing_upload_success);
+				CustomDialogUploadProspectSuccess(msg);
+
+			}
+		}
+
+	}
+
 
 	/*public void initUploadCustomer() {
         JSONObject oResponse;
@@ -1714,6 +2099,33 @@ public class CustomerActivity extends ActionBarActivity implements
 
 	}
 
+	public void CustomDialogUploadProspectSuccess(String msg) {
+		if (progressDialog != null) {
+			progressDialog.dismiss();
+		}
+		final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				act);
+		alertDialogBuilder
+				.setMessage(msg)
+				.setCancelable(false)
+				.setPositiveButton(
+						act.getApplicationContext().getResources()
+								.getString(R.string.MSG_DLG_LABEL_OK),
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int id) {
+								AlertDialog alertDialog = alertDialogBuilder
+										.create();
+								alertDialog.dismiss();
+								databaseHandler.updateStatusApproveProspect();
+								gotoCustomer();
+							}
+						});
+		AlertDialog alertDialog = alertDialogBuilder.create();
+		alertDialog.show();
+
+	}
+
     public class ListViewAdapter extends ArrayAdapter<Customer> {
 		Activity activity;
 		int layoutResourceId;
@@ -1746,7 +2158,6 @@ public class CustomerActivity extends ActionBarActivity implements
 						.findViewById(R.id.customer_title_nama_customer);
 				holder.list_alamat = (TextView) row
 						.findViewById(R.id.customer_title_alamat_customer);
-
 				row.setTag(holder);
 			} else {
 				holder = (UserHolder) row.getTag();
@@ -1754,10 +2165,9 @@ public class CustomerActivity extends ActionBarActivity implements
 			customerData = data.get(position);
 			holder.list_kodeCustomer.setText(customerData.getKode_customer());
 			holder.list_namaCustomer.setText(customerData.getNama_toko());
-
+			holder.list_alamat.setText(customerData.getAlamat());
 			// Wilayah wilayah = databaseHandler.getWilayah(customerData
 			// .getId_wilayah());
-			holder.list_alamat.setText(customerData.getAlamat());
 			holder.list_kodeCustomer.setTypeface(typefaceSmall);
 			holder.list_namaCustomer.setTypeface(typefaceSmall);
 			holder.list_alamat.setTypeface(typefaceSmall);
@@ -1768,7 +2178,16 @@ public class CustomerActivity extends ActionBarActivity implements
 					String id_customer = String.valueOf(data.get(position)
 							.getId_customer());
 					saveAppDataCustomerIdCustomer(id_customer);
-					gotoDetailCustomer();
+					SharedPreferences spPreferences = getSharedPrefereces();
+					String main_app_staff_level = spPreferences.getString(CONFIG.SHARED_PREFERENCES_STAFF_LEVEL, null);
+					int levelStaff = Integer.parseInt(main_app_staff_level);
+
+					if(levelStaff<=2){
+						gotoDetailCustomer1();
+					}else{
+						gotoDetailCustomer();
+					}
+
 				}
 			});
 			return row;
@@ -1785,6 +2204,18 @@ public class CustomerActivity extends ActionBarActivity implements
 
 	public void gotoDetailCustomer() {
 		Intent i = new Intent(this, DetailEditCustomer.class);
+		startActivity(i);
+		finish();
+	}
+
+	public void gotoCustomer() {
+		Intent i = new Intent(this, CustomerActivity.class);
+		startActivity(i);
+		finish();
+	}
+
+	public void gotoDetailCustomer1() {
+		Intent i = new Intent(this, DetailEditCustomerNoo.class);
 		startActivity(i);
 		finish();
 	}
@@ -1861,6 +2292,11 @@ public class CustomerActivity extends ActionBarActivity implements
 				}else if (position == 13) {
 					Intent intentActivity = new Intent(this,
 							RequestActivity.class);
+					startActivity(intentActivity);
+					finish();
+				}else if (position == 14) {
+					Intent intentActivity = new Intent(this,
+							Kanvas_Uploaded.class);
 					startActivity(intentActivity);
 					finish();
 				}

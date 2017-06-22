@@ -939,13 +939,13 @@ public class TargetPenjualanActivity extends FragmentActivity {
 					.getAllPenjualan();
 
 			for (Penjualan penjualan : dataProductPenjualan) {
-				response_data = uploadPenjualan(url,
-						penjualan.getNomer_product_terjual(),
-						String.valueOf(penjualan.getDate_product_terjual()),
-						String.valueOf(penjualan.getTime_product_terjual()),
-						String.valueOf(penjualan.getId_staff()),
-						String.valueOf(penjualan.getId_customer()),
-						String.valueOf(penjualan.getDiskon()));
+				//response_data = uploadPenjualan(url,
+						//penjualan.getNomer_product_terjual(),
+						//String.valueOf(penjualan.getDate_product_terjual()),
+						//String.valueOf(penjualan.getTime_product_terjual()),
+						//String.valueOf(penjualan.getId_staff()),
+						//String.valueOf(penjualan.getId_customer()),
+						//String.valueOf(penjualan.getDiskon()));
 			}
 			return null;
 		}
@@ -1034,10 +1034,10 @@ public class TargetPenjualanActivity extends FragmentActivity {
 					.getAllPenjualanDetail();
 
 			for (PenjualanDetail penjualan : dataProductPenjualanDetail) {
-				response_data = uploadPenjualanDetail(url,
-						penjualan.getNomer_product_terjual(),
-						String.valueOf(penjualan.getIdProduct()),
-						String.valueOf(penjualan.getJumlah()));
+				//response_data = uploadPenjualanDetail(url,
+				//		penjualan.getNomer_product_terjual(),
+				//		String.valueOf(penjualan.getIdProduct()),
+				//		String.valueOf(penjualan.getJumlah()));
 			}
 			return null;
 		}

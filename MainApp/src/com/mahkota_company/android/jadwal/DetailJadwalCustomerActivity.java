@@ -189,7 +189,7 @@ public class DetailJadwalCustomerActivity extends FragmentActivity {
 					}
 				});
 
-        mButtonCustomerDetailMaps.setVisibility(View.INVISIBLE);
+        //mButtonCustomerDetailMaps.setVisibility(View.INVISIBLE);
 
 		tvKodeCustomer.setTypeface(typefaceSmall);
 		tvNamaCustomer.setTypeface(typefaceSmall);
@@ -674,9 +674,9 @@ public class DetailJadwalCustomerActivity extends FragmentActivity {
 			saveAppDataCustomerIdCustomer(main_app_table_id);
 			Intent intentActivity = new Intent(
 					DetailJadwalCustomerActivity.this,
-					DetailCustomerLocatorActivity.class);
+					DetailCustomerJadwalLocator.class);
 			startActivity(intentActivity);
-			finish();
+			//finish();
 		} else {
 			gotoJadwalCustomer();
 		}

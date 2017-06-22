@@ -36,15 +36,13 @@ import com.mahkota_company.android.NavigationDrawerFragment;
 import com.mahkota_company.android.R;
 import com.mahkota_company.android.check_customer.CheckCustomer;
 import com.mahkota_company.android.check_new_prospect.CheckCustomerProspectActivity;
-import com.mahkota_company.android.contact.SuperVisor;
+import com.mahkota_company.android.supervisor.SuperVisor;
 import com.mahkota_company.android.customer.CustomerActivity;
 import com.mahkota_company.android.database.DatabaseHandler;
 import com.mahkota_company.android.database.Product;
-import com.mahkota_company.android.database.ReqLoad;
 import com.mahkota_company.android.display_product.DisplayProductActivity;
 import com.mahkota_company.android.jadwal.JadwalActivity;
 import com.mahkota_company.android.locator.LocatorActivity;
-import com.mahkota_company.android.merchandise.LocatorStaffActivity;
 import com.mahkota_company.android.product.ProductActivity;
 import com.mahkota_company.android.prospect.CustomerProspectActivity;
 import com.mahkota_company.android.retur.ReturActivity;
@@ -877,6 +875,7 @@ public class InventoryActivity extends ActionBarActivity implements
 
 	}
 
+	/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -903,6 +902,7 @@ public class InventoryActivity extends ActionBarActivity implements
 				return super.onOptionsItemSelected(item);
 		}
 	}
+	*/
 
 	public class ListViewAdapter extends ArrayAdapter<Product> {
 		Activity activity;
@@ -1097,6 +1097,11 @@ public class InventoryActivity extends ActionBarActivity implements
 				}else if (position == 13) {
 					Intent intentActivity = new Intent(this,
 							RequestActivity.class);
+					startActivity(intentActivity);
+					finish();
+				}else if (position == 14) {
+					Intent intentActivity = new Intent(this,
+							Kanvas_Uploaded.class);
 					startActivity(intentActivity);
 					finish();
 				}

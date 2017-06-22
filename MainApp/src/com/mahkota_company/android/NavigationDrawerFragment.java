@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -16,14 +17,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.mahkota_company.android.database.Branch;
 import com.mahkota_company.android.database.DatabaseHandler;
 import com.mahkota_company.android.database.Staff;
+import com.mahkota_company.android.utils.CONFIG;
 
 @SuppressWarnings("deprecation")
 public class NavigationDrawerFragment extends Fragment implements
@@ -40,6 +44,7 @@ public class NavigationDrawerFragment extends Fragment implements
 	// private boolean mFromSavedInstanceState;
 	private int mCurrentSelectedPosition;
 	private TextView txtKodeStaff;
+	private ImageView foto;
 	private TextView txtNamaLengkap;
 	private TextView txtBranch;
 	private Typeface typefaceSmall;
@@ -59,6 +64,7 @@ public class NavigationDrawerFragment extends Fragment implements
 		txtKodeStaff = (TextView) view.findViewById(R.id.txtUsername);
 		txtKodeStaff.setTypeface(typefaceSmall);
 		txtNamaLengkap = (TextView) view.findViewById(R.id.txtName);
+		foto = (ImageView) view.findViewById(R.id.imgAvatar);
 		txtNamaLengkap.setTypeface(typefaceSmall);
 		txtBranch = (TextView) view.findViewById(R.id.txtBranch);
 		txtBranch.setTypeface(typefaceSmall);
@@ -84,6 +90,7 @@ public class NavigationDrawerFragment extends Fragment implements
 		Branch branch = databaseHandler.getBranch(Integer.parseInt(staff
 				.getId_branch()));
 		txtBranch.setText(branch.getDeskripsi());
+
 		return view;
 	}
 
@@ -215,8 +222,8 @@ public class NavigationDrawerFragment extends Fragment implements
 				getResources().getDrawable(R.drawable.customeradd)));
 		items.add(new NavigationItem(getResources().getString(R.string.menu_15),
 				getResources().getDrawable(R.drawable.req)));
-		//items.add(new NavigationItem(getResources().getString(R.string.menu_15),
-		//		getResources().getDrawable(R.drawable.price_tag)));
+		items.add(new NavigationItem(getResources().getString(R.string.menu_17),
+				getResources().getDrawable(R.drawable.task)));
 
 		return items;
 	}

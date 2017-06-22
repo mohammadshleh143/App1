@@ -15,7 +15,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,8 +29,8 @@ import com.mahkota_company.android.NavigationDrawerCallbacks;
 import com.mahkota_company.android.NavigationDrawerFragment;
 import com.mahkota_company.android.check_customer.CheckCustomer;
 import com.mahkota_company.android.check_new_prospect.CheckCustomerProspectActivity;
-import com.mahkota_company.android.contact.ContactActivty;
-import com.mahkota_company.android.contact.SuperVisor;
+import com.mahkota_company.android.inventory.Kanvas_Uploaded;
+import com.mahkota_company.android.supervisor.SuperVisor;
 import com.mahkota_company.android.customer.CustomerActivity;
 import com.mahkota_company.android.database.Customer;
 import com.mahkota_company.android.database.DatabaseHandler;
@@ -42,8 +41,6 @@ import com.mahkota_company.android.display_product.DisplayProductActivity;
 import com.mahkota_company.android.inventory.InventoryActivity;
 import com.mahkota_company.android.inventory.RequestActivity;
 import com.mahkota_company.android.jadwal.JadwalActivity;
-import com.mahkota_company.android.merchandise.CustomerMerchandiseActivity;
-import com.mahkota_company.android.merchandise.LocatorStaffActivity;
 import com.mahkota_company.android.product.ProductActivity;
 import com.mahkota_company.android.prospect.CustomerProspectActivity;
 import com.mahkota_company.android.retur.ReturActivity;
@@ -1526,6 +1523,11 @@ public class LocatorActivity extends ActionBarActivity implements
 				}else if (position == 13) {
 					Intent intentActivity = new Intent(this,
 							RequestActivity.class);
+					startActivity(intentActivity);
+					finish();
+				}else if (position == 14) {
+					Intent intentActivity = new Intent(this,
+							Kanvas_Uploaded.class);
 					startActivity(intentActivity);
 					finish();
 				}

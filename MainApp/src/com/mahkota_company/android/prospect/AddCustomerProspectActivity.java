@@ -857,7 +857,7 @@ public class AddCustomerProspectActivity extends FragmentActivity {
 						&& etTanggalLahir.getText().length() > 0
 						&& etNama_toko.getText().length() > 0
 						//&& etNamaCustomer.getText().length() > 0
-						&& etKode_pos.getText().length() > 3
+						&& etKode_pos.getText().length() > 4
 						&& etAlamatCustomer.getText().length() > 0
 						&& etNamaPasar.getText().length() > 0
 						&& idCluster!=0

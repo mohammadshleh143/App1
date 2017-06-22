@@ -21,7 +21,6 @@ import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -41,7 +40,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,22 +47,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mahkota_company.android.R;
-import com.mahkota_company.android.contact.PerbaikanActivity;
-import com.mahkota_company.android.database.Customer;
+import com.mahkota_company.android.database.Branch;
 import com.mahkota_company.android.database.DatabaseHandler;
+import com.mahkota_company.android.database.DetailSalesKanvas;
 import com.mahkota_company.android.database.DetailSalesOrder;
 import com.mahkota_company.android.database.NewDetailPenjualan;
 import com.mahkota_company.android.database.Penjualan;
 import com.mahkota_company.android.database.PenjualanDetail;
 import com.mahkota_company.android.database.Product;
+import com.mahkota_company.android.database.SalesOrder;
 import com.mahkota_company.android.database.StockVan;
-import com.mahkota_company.android.prospect.AddCustomerProspectActivity;
-import com.mahkota_company.android.sales_order.AddSalesOrderActivity;
 import com.mahkota_company.android.utils.CONFIG;
 import com.mahkota_company.android.utils.GlobalApp;
 
@@ -112,6 +108,7 @@ public class SalesKanvasActivity extends FragmentActivity {
 	private TextView tvNoNotaValue,tvImage1Customer,tvImage2Customer,ttd1;
 	private TextView tvTotalbayarValue;
 	private TextView tvHeaderTotalbayarTitle;
+	public ArrayList<DetailSalesKanvas> detailSaleskanvas = new ArrayList<DetailSalesKanvas>();
 	private LocationManager locationManager;
 	//private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 	private Button mButtonAddProduct,mButtonCustomerDetailImage1,mButtonCustomerDetailImage2,mButtonCustomerttd1;
@@ -220,6 +217,7 @@ public class SalesKanvasActivity extends FragmentActivity {
 		mButtonSave.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if(passValidationForUpload()) {
+
 					nama = etNamaCustomer.getText().toString();
 					alamat = etAlamat.getText().toString();
 					keterangan = etKeterangan.getText().toString();
@@ -230,6 +228,7 @@ public class SalesKanvasActivity extends FragmentActivity {
 					lats = String.valueOf(latitude);
 					longs = String.valueOf(longitude);
 					new UploadData().execute();
+					savePenjualan();
 				}
 
 			}
@@ -363,6 +362,102 @@ public class SalesKanvasActivity extends FragmentActivity {
 
 		mButtonCustomerttd1.setOnClickListener(mDetailCustomerButtonOnClickListener);
 	}
+
+	///////////////////////////////////////////////////////////////////////////////
+	private void savePenjualan() {
+		if (etKeterangan.getText().toString().length() > 0) {
+
+			String timeStamp = new SimpleDateFormat("HHmmss",
+					Locale.getDefault()).format(new Date());
+
+			final String date = "yyyyMMdd";
+			Calendar calendar = Calendar.getInstance();
+			SimpleDateFormat dateFormat = new SimpleDateFormat(date);
+			final String dateOutput = dateFormat.format(calendar
+					.getTime());
+
+			int countData = databaseHandler.getCountSalesOrder();
+			countData = countData + 1;
+			String datetime = dateOutput + timeStamp + countData;
+
+			SharedPreferences spPreferences = getSharedPrefereces();
+			String kodeBranch = spPreferences.getString(
+					CONFIG.SHARED_PREFERENCES_STAFF_KODE_BRANCH, null);
+			String username = spPreferences.getString(
+					CONFIG.SHARED_PREFERENCES_STAFF_USERNAME, null);
+			Branch branch = databaseHandler.getBranch(Integer
+					.parseInt(kodeBranch));
+			String nomerOrder = CONFIG.CONFIG_APP_KODE_SO_HEADER
+					+ branch.getKode_branch() + "." + datetime
+					+ countData;
+			String id_staff=spPreferences.getString(CONFIG.SHARED_PREFERENCES_STAFF_ID_STAFF, null);
+			final String date2 = "yyyy-MM-dd";
+			Calendar calendar2 = Calendar.getInstance();
+			SimpleDateFormat dateFormat2 = new SimpleDateFormat(date2);
+			final String checkDate = dateFormat2.format(calendar2
+					.getTime());
+			Calendar now = Calendar.getInstance();
+			int hrs = now.get(Calendar.HOUR_OF_DAY);
+			int min = now.get(Calendar.MINUTE);
+			int sec = now.get(Calendar.SECOND);
+			final String time = zero(hrs) + zero(min) + zero(sec);
+
+			ArrayList<Penjualan> tempPenjualan_list = databaseHandler
+					.getAllPenjualan();
+			int tempIndex = 0;
+			for (Penjualan penjualan : tempPenjualan_list) {
+				tempIndex = penjualan.getId_penjualan();
+			}
+			int index = 1;
+			for (NewDetailPenjualan detailPenjualan : detailPenjualanList) {
+				Penjualan penjualan = new Penjualan();
+				penjualan.setId_penjualan(tempIndex + index);
+				penjualan.setId_staff(Integer.parseInt(id_staff));
+				penjualan.setType_penjualan(0);
+				penjualan.setNo_penjualan(tvNoNotaValue.getText().toString());
+				penjualan.setNama_customer(etNamaCustomer.getText().toString());
+				penjualan.setAlamat(etAlamat.getText().toString());
+				penjualan.setKeterangan(etKeterangan.getText().toString());
+				penjualan.setLats(String.valueOf(latitude));
+				penjualan.setLongs(String.valueOf(longitude));
+				penjualan.setFoto1(tvImage1Customer.getText().toString());
+				penjualan.setFoto2(tvImage2Customer.getText().toString());
+				penjualan.setTtd(ttd1.getText().toString());
+				databaseHandler.addPenjualan(penjualan);
+
+				PenjualanDetail penjualandetail = new PenjualanDetail();
+				penjualandetail.setId_penjualan_detail(tempIndex + index);
+				penjualandetail.setNo_penjualan(tvNoNotaValue.getText().toString());
+				penjualandetail.setId_product(String.valueOf(detailPenjualan.getId_product()));
+				penjualandetail.setHarga(detailPenjualan.getHarga());
+				penjualandetail.setHarga_jual(detailPenjualan.getHarga_jual());
+				penjualandetail.setNomer_request_load(detailPenjualan.getNomer_request_load());
+				penjualandetail.setId_staff(id_staff);
+				penjualandetail.setJumlah(String.valueOf(detailPenjualan.getJumlah_order()));
+				penjualandetail.setJumlah1(String.valueOf(detailPenjualan.getJumlah_order1()));
+				penjualandetail.setJumlah2(String.valueOf(detailPenjualan.getJumlah_order2()));
+				penjualandetail.setJumlah3(String.valueOf(detailPenjualan.getJumlah_order3()));
+				databaseHandler.addPenjualanDetail(penjualandetail);
+
+				//String kode_customer = spinnerKodeCustomer.getSelectedItem().toString();
+				//databaseHandler.updateJadwalwhereCheckOut(kode_customer);
+				index += 1;
+			}
+
+			String msg = getApplicationContext().getResources()
+					.getString(R.string.app_kanvas_save_success);
+			showCustomDialogSaveSuccess(msg);
+
+		} else {
+
+			String msg = getApplicationContext()
+					.getResources()
+					.getString(
+							R.string.app_photo_purchase_save_failed_no_data);
+			showCustomDialog(msg);
+		}
+	}
+	///////////////////////////////////////////////////////////////////////////////
 
 	public class UploadData extends AsyncTask<String, Integer, String> {
 		@Override
@@ -943,6 +1038,20 @@ public class SalesKanvasActivity extends FragmentActivity {
 					getApplicationContext().getResources().getString(
 							R.string.app_sales_to_failed_no_keterangan));
 			return false;
+		}else if(tvImage1Customer.getText().length()==0){
+			String msg = getApplicationContext()
+					.getResources()
+					.getString(
+							R.string.app_sales_to_failed_no_foto);
+			showCustomDialog(msg);
+			return false;
+		}else if(ttd1.getText().length()==0){
+			String msg = getApplicationContext()
+					.getResources()
+					.getString(
+							R.string.app_sales_to_failed_no_ttd);
+			showCustomDialog(msg);
+			return false;
 		}
 		return true;
 	}
@@ -971,6 +1080,8 @@ public class SalesKanvasActivity extends FragmentActivity {
 					break;
 				case R.id.sales_to_btn_save:
 					if(passValidationForUpload()) {
+						savePenjualan();
+						/*
 						nama = etNamaCustomer.getText().toString();
 						alamat = etAlamat.getText().toString();
 						keterangan = etKeterangan.getText().toString();
@@ -998,6 +1109,7 @@ public class SalesKanvasActivity extends FragmentActivity {
 //								.getString(
 //										R.string.app_inventory_unload_product_target_penjualan_add_save_success);
 //						showCustomDialogSaveSuccess(msg);
+						*/
 					}
 					break;
 				default:

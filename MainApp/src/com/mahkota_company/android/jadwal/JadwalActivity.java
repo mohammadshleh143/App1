@@ -24,7 +24,8 @@ import com.mahkota_company.android.NavigationDrawerCallbacks;
 import com.mahkota_company.android.NavigationDrawerFragment;
 import com.mahkota_company.android.check_customer.CheckCustomer;
 import com.mahkota_company.android.check_new_prospect.CheckCustomerProspectActivity;
-import com.mahkota_company.android.contact.SuperVisor;
+import com.mahkota_company.android.inventory.Kanvas_Uploaded;
+import com.mahkota_company.android.supervisor.SuperVisor;
 import com.mahkota_company.android.customer.CustomerActivity;
 import com.mahkota_company.android.database.DatabaseHandler;
 import com.mahkota_company.android.database.Jadwal;
@@ -852,6 +853,11 @@ public class JadwalActivity extends ActionBarActivity implements
 				}else if (position == 13) {
 					Intent intentActivity = new Intent(this,
 							RequestActivity.class);
+					startActivity(intentActivity);
+					finish();
+				}else if (position == 14) {
+					Intent intentActivity = new Intent(this,
+							Kanvas_Uploaded.class);
 					startActivity(intentActivity);
 					finish();
 				}

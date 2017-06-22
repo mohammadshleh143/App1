@@ -6,7 +6,7 @@ import org.acra.annotation.ReportsCrashes;
 
 import android.app.Application;
 
-//@ReportsCrashes(formKey = "", mailTo = "d.pramukti@yahoo.com", mode = ReportingInteractionMode.TOAST, resToastText = (R.string.crash_toast))
+//@ReportsCrashes(formKey = "", mailTo = "@yahoo.com", mode = ReportingInteractionMode.TOAST, resToastText = (R.string.crash_toast))
 public class CrashApplicationClass extends Application {
 	@Override
 	public void onCreate() {
